@@ -22,7 +22,7 @@
 </head>
 
 <body class="{{ $class ?? '' }}">
-<div class="wrap">
+<div class="wrap wrap2">
     <div class="container">
         @yield('content')
     </div>
