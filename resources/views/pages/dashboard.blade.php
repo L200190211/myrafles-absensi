@@ -21,11 +21,18 @@
         <div class="row mt-7">
             <div class="col-lg-12">
                 <ul class="navigate">
-                    <li><a href="#"><i class="fa fa-home"></i> History Absensi</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i> History Absensi</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i> History Absensi</a></li>
-                    <li><a href="#"><i class="fa fa-home"></i> History Absensi</a></li>
-                    <li><a href="{{route('logout')}}"><i class="fa fa-home"></i> Log Out</a></li>
+                    <li><a href="{{route('absen.history')}}"><i class="fa fa-home"></i> History Absensi</a></li>
+                    <li><a href="{{route('cuti.history')}}"><i class="fa fa-home"></i>  Kelola Cuti</a></li>
+                    <li><a href="#"><i class="fa fa-home"></i> Ubah Password</a></li>
+                    <li><a href="{{route('user.list')}}"><i class="fa fa-home"></i> Lists User</a></li>
+                    <li> <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
+                        @csrf
+                        <a href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
+                            class="nav-link font-weight-bold px-0">
+                            <i class="fa fa-home"></i> <span>Log Out</span>
+                        </a>
+                    </form>
                 </ul>
             </div>
         </div>
