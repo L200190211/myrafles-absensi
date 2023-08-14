@@ -9,4 +9,10 @@ class Cuti extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+
+    public function cuti()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

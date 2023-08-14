@@ -17,7 +17,7 @@ return new class extends Migration
             $table->enum('perihal', ['Kurang Fit', 'Sakit', 'Acara Keluarga', 'Acara Lainnya', 'Lainnya'])->default('Lainnya');
             $table->text('total')->nullable();
             $table->timestamp('tglCuti')->nullable();
-            $table->enum('status', [0, 1])->default(0);
+            $table->enum('status', [0, 1, 2])->default(0);
             $table->text('rincian')->nullable();
             $table->timestamps();
         });
