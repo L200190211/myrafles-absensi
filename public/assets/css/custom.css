@@ -43,7 +43,8 @@
 .btn-primary{border: 1px solid #EE1A21;}
 .btn-primary:hover {color: #EE1A21;background: #FFE5E6;}
 .btn-primary:hover i {color: #EE1A21;transition:all .3s ease-in-out}
-
+.btn-submit {background: #F6E815 !important;color: #000 !important;padding: 0.7rem 2rem;font-weight: 600;border: 1px solid #ADA30C;font-size: 16px;}
+.btn-submit:hover{background: #000F5C !important;color:#fff!important;border:1px solid #000F5C!important}
 
 /* TitlePage */
 .titlepage{margin:2rem 0;display:flex;justify-content:space-between;align-items:center}

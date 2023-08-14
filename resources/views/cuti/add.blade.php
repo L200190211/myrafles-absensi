@@ -28,40 +28,47 @@ smallwrap
             @csrf
             <div class="grid grid2">
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label mb-3">SKU</label>
-                    <input type="text" class="form-control" id="sku" name="sku" placeholder="Masukkan SKU">
+                    <label for="exampleFormControlInput1" class="form-label mb-3">Tanggal Cuti</label>
+                    <input type="date" class="form-control" id="tglCuti" name="tglCuti" placeholder="Masukkan Tgl Cuti">
                 </div>
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label mb-3">Harga Produk</label>
+                    <label for="exampleFormControlInput1" class="form-label mb-3">Berapa Hari Kerja</label>
                     <div class="input-group">
-                        <input type="text/" class="form-control rupiah" id="harga" name="harga" placeholder="Masukkan Harga Jual Produk">
-                        <span class="input-group-text">Hari</span>
+                        <input type="text/" class="form-control" id="total" name="total" placeholder="Masukkan Total Hari">
+                        <span class="input-group-text" style="border-right: 1px solid #d2d6da !important">Hari</span>
                     </div>
                 </div>
             </div>
             <div class="grid grid2">
-                <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label mb-3">Unit</label>
-                    <input type="text" class="form-control" name="unit" placeholder="Contoh : pcs, kotak">
+                <div class="formgroup w60">
+                    <label for="exampleFormControlInput1" class="form-label mb-3">Perihal Cuti</label>
+                    <select name="perihal" class="form-control select2" autocomplete="off" id="perihal">
+                        <option selected="" disabled="">--- Pilih Salah Satu ---</option>
+                        <option value="ijin">Ijin</option>
+                        <option value="sakit">Sakit</option>
+                        <option value="kesehatan">Kepentingan Keluarga</option>
+                    </select>
                 </div>
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label mb-3">Kategori</label>
-                    <select name="kategori" class="form-control select2" autocomplete="off">
-                        <option selected="" disabled="">--- Pilih Salah Satu ---</option>
-                        <option value="kecantikan">Kecantikan</option>
-                        <option value="kesehatan">Kesehatan </option>
-                    </select>
+
                 </div>
             </div>
             <div class="formgroup">
-                <label for="exampleFormControlInput1" class="form-label mb-3">Nama Produk</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan Nama Produk">
+                <label for="exampleFormControlInput1" class="form-label mb-3">Rincian Cuti</label>
+                <textarea class="form-control" id="rincian" name="rincian" placeholder="Masukkan Rincian Cuti"></textarea>
             </div>
-            <button type="submit" class="btn btn-submit mt-4">Tambah Produk</button>
+            <input type="hidden" name="who" value="{{auth()->user()->id}}" />
+            <button type="submit" class="btn btn-submit mt-1">Submit</button>
         </form>
     </div>
 </div>
 @endsection
 
 @push('js')
+<script type="text/javascript">
+    $(document).ready(function() {
+        //select2
+        $("#perihal").select2();
+    });
+</script>
 @endpush
