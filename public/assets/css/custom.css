@@ -24,13 +24,14 @@
 .navigate a{padding:2rem;background:#fff;width:100%;display:flex;align-items:center;grid-gap:1rem;justify-content:center;font-size:20px;font-weight:700;border-radius:1rem;border:2px solid var(--color-secondary)}
 
 .card-header.pb-0.text-start {background: transparent;}
+.left-text {text-align: left;}
 
 /* Table */
 .wrap .table thead{background:#F6E815;height:4rem}
 .wrap .table{background-color:#fff;overflow:hidden;border-radius:1.2rem;color:#2F2F3B}
 .wrap .table thead tr{vertical-align:middle;font-weight:700!important}
 .table th {font-weight: 700;}
-.table th, .table td {padding: 1.25rem 2rem; color: #2F2F3B !important;font-size: 1rem;}
+.table th, .table td {padding: 0.75rem 2rem; color: #2F2F3B !important;font-size: 1rem;vertical-align: middle;}
 .table thead tr th:last-child, .table tbody tr td:last-child {text-align: right;}
 
 
@@ -65,4 +66,5 @@
 
 @media (max-width:768px){
     .smallwrap{max-width: 93% !important;}
+    .wrap .table{margin:auto;border-collapse:collapse;overflow-x:auto;display:block;width:fit-content;max-width:100%}
 }

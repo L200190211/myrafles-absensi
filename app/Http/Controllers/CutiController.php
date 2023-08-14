@@ -2,26 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cuti;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Cuti;
+use Carbon\Carbon;
+use Alert;
 
 class CutiController extends Controller
 {
     public function create()
     {
-
-        return view('cuti.add');
+        $perihal = ['Kurang Fit', 'Sakit', 'Acara Keluarga', 'Acara Lainnya', 'Lainnya'];
+        return view('cuti.add', compact('perihal'));
     }
 
     public function store(Request $request)
     {
         $cuti = new Cuti();
         $cuti->who = $request->who;
-        $cuti->asal = $request->asalBeli;
-        $cuti->total = $request->total;
-        $cuti->rincian = $request->rincian;
         $cuti->perihal = $request->perihal;
+        $cuti->total = $request->total;
         $cuti->tglCuti = $request->tglCuti;
+        $cuti->rincian = $request->rincian;
 
         $year = Carbon::parse($cuti->tglCuti)->format('Y');
         $month = Carbon::parse($cuti->tglCuti)->format('m');
@@ -36,12 +38,12 @@ class CutiController extends Controller
 
         // Notification::send($users, new AdjustmentCreated($adjustment));
         Alert::success('Request Cuti Sukses Dibuat');
-        return redirect()->route('adjustment.history', $request->tujuan);
+        return redirect()->route('cuti.history');
     }
 
     public function history()
     {
-
-        return view('cuti.history');
+        $data = DB::table('cutis')->orderByDesc('created_at')->paginate(25);
+        return view('cuti.history', compact('data'));
     }
 }

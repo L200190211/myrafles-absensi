@@ -44,9 +44,9 @@ smallwrap
                     <label for="exampleFormControlInput1" class="form-label mb-3">Perihal Cuti</label>
                     <select name="perihal" class="form-control select2" autocomplete="off" id="perihal">
                         <option selected="" disabled="">--- Pilih Salah Satu ---</option>
-                        <option value="ijin">Ijin</option>
-                        <option value="sakit">Sakit</option>
-                        <option value="kesehatan">Kepentingan Keluarga</option>
+                        @foreach ($perihal as $perihals)
+                        <option value="{{$perihals}}" selected="">{{$perihals}}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="formgroup">
