@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('absens', function (Blueprint $table) {
             $table->id();
             $table->foreignId('users_id')->constrained();
+            $table->string('ip_address')->nullable();
             $table->timestamp('tgl_absen')->nullable();
             $table->timestamps();
         });
