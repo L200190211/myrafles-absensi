@@ -12,7 +12,7 @@
             </div>
             <div class="col-lg-5">
                 <div class="liveclock">
-                    <b>10.45</b>
+                   <div id="time"></div>
                     <span>10 Agustus 2023</span>
                 </div>
             </div>
@@ -39,4 +39,13 @@
 @endsection
 
 @push('js')
+<script>
+  function showTime() {
+    let a = moment().format('H:m:s')
+    document.getElementById('time').innerHTML = "<b>"+a+"</b>";
+  }
+
+  setInterval(showTime, 1000);
+
+</script>
 @endpush
