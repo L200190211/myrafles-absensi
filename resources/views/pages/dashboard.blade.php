@@ -13,7 +13,7 @@
             <div class="col-lg-5">
                 <div class="liveclock">
                    <div id="time"></div>
-                    <span>10 Agustus 2023</span>
+                    <span>{{now()->format('j F Y');}}</span>
                 </div>
             </div>
         </div>
