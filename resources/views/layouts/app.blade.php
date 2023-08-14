@@ -22,11 +22,14 @@
 </head>
 
 <body class="{{ $class ?? '' }}">
-<div class="wrap wrap2">
-    <div class="container">
-        @yield('content')
+    <div class="wrap wrap2">
+        <div class="container @yield('mxwidth')">
+            <div class="titlepage">
+                @yield('titlepage')
+            </div>
+            @yield('content')
+        </div>
     </div>
-</div>
 
     <!--   Core JS Files   -->
     <script src="{{asset('assets/js/core/popper.min.js')}}"></script>
