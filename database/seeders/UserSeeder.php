@@ -20,9 +20,9 @@ class UserSeeder extends Seeder
         
         $admjaco = User::create([
             'id' =>1,
-            'name' => 'Superadmin',
-            'email' => 'superadmin@posjaco.com',
-            'usrn' => 'superadmin',
+            'name' => 'Admin JACO',
+            'email' => 'admin@posjaco.com',
+            'usrn' => 'admjaco',
             'lastLogin' => now(),
             'kota' => 'Surabaya',
             'noWa' => '888999333',
@@ -47,7 +47,7 @@ class UserSeeder extends Seeder
 
         $admin = User::create([
                 'id' => 3,
-                'name' => 'Admin',
+                'name' => 'Robert Admin',
                 'email' => 'admin@admin.com',
                 'usrn' => 'admin',
                 'lastLogin' => now(),
@@ -56,20 +56,6 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('1234')
         ]);
 
-        $admin->assignRole('admin');
-
-
-        $staff = User::create([
-          'id' => 4,
-          'name' => 'Staff',
-          'email' => 'staff@staff.com',
-          'usrn' => 'staff',
-          'lastLogin' => now(),
-          'kota' => 'Surabaya',
-          'noWa' => '888999333',
-          'password' => bcrypt('1234')
-        ]);
-
-        $staff->assignRole('staff');
-    } 
+        $admin->assignRole('staff');
+      }
 }
