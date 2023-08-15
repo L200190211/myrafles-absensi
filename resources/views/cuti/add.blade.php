@@ -8,8 +8,8 @@ smallwrap
 @section('titlepage')
 <h2>Ajukan Cuti</h2>
 <div class="title-right">
-    <a href="{{ route('home') }}" class="btx btn-primary"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-    <a href="{{ route('cuti.history') }}" class="btx btn-primary btn-id">History Cuti</a>
+    <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+    <a href="{{ route('cuti.history') }}" class="btx btn-third btn-id">History Cuti</a>
 </div>
 @endsection
 
@@ -58,7 +58,7 @@ smallwrap
                 <textarea class="form-control" id="rincian" name="rincian" placeholder="Masukkan Rincian Cuti"></textarea>
             </div>
             <input type="hidden" name="who" value="{{auth()->user()->id}}" />
-            <button type="submit" class="btn btn-submit mt-1">Submit</button>
+            <button type="submit" class="btx btn-submit mt-1">Submit</button>
         </form>
     </div>
 </div>

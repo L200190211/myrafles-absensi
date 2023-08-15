@@ -10,6 +10,7 @@ use Alert;
 
 class CutiController extends Controller
 {
+    // Tambah Ajuan Cuti
     public function create()
     {
         $perihal = ['Kurang Fit', 'Sakit', 'Acara Keluarga', 'Acara Lainnya', 'Lainnya'];
@@ -36,14 +37,39 @@ class CutiController extends Controller
 
         $cuti->save();
 
-        // Notification::send($users, new AdjustmentCreated($adjustment));
         Alert::success('Request Cuti Sukses Dibuat');
         return redirect()->route('cuti.history');
     }
 
+    // Riwayat Cuti
     public function history()
     {
-        $data = DB::table('cutis')->orderByDesc('created_at')->paginate(25);
+        $data = DB::table('cutis')->orderByRaw('status ASC, created_at ASC')->paginate(25);
         return view('cuti.history', compact('data'));
+    }
+
+
+    // Tolak Cuti
+    public function decline($id)
+    {
+        $data = Cuti::find($id);
+        if ($data->status == "0") {
+            $data->status = "2";
+        };
+        $data->save();
+        Alert::toast('Request Cuti Ditolak', 'error');
+        return redirect()->route('cuti.history');
+    }
+
+    // Setujui Cuti
+    public function accept($id)
+    {
+        $data = Cuti::find($id);
+        if ($data->status == "0") {
+            $data->status = "1";
+        };
+        $data->save();
+        Alert::success('Request Cuti Diterima');
+        return redirect()->route('cuti.history');
     }
 }

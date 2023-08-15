@@ -8,10 +8,10 @@ use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\ResetPassword;
-use App\Http\Controllers\ChangePassword;       
-use App\Http\Controllers\AbsenController;       
-use App\Http\Controllers\CutiController;       
-use App\Http\Controllers\UserController;       
+use App\Http\Controllers\ChangePassword;
+use App\Http\Controllers\AbsenController;
+use App\Http\Controllers\CutiController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,14 +25,16 @@ use App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
-     
-            
+
+
 
 Route::get('/login', [LoginController::class, 'show'])->middleware('guest')->name('login');
 Route::post('/login', [LoginController::class, 'login'])->middleware('guest')->name('login.perform');
-Route::get('/', function () {return redirect('/dashboard');})->middleware('auth');
+Route::get('/', function () {
+	return redirect('/dashboard');
+})->middleware('auth');
 Route::get('/register', [RegisterController::class, 'create'])->middleware('guest')->name('register');
 Route::post('/register', [RegisterController::class, 'store'])->middleware('guest')->name('register.perform');
 Route::get('/reset-password', [ResetPassword::class, 'show'])->middleware('guest')->name('reset-password');
@@ -43,35 +45,33 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middle
 
 Route::group(['middleware' => 'auth'], function () {
 
-	Route::group(['prefix' => 'cuti' , 'as' => 'cuti.'] , function() {
+	Route::group(['prefix' => 'cuti', 'as' => 'cuti.'], function () {
 
 		Route::get('/add', [CutiController::class, 'create'])->name('create');
 		Route::post('/add', [CutiController::class, 'store'])->name('store');
 		Route::get('/history', [CutiController::class, 'history'])->name('history');
+		Route::get('/decline/{id}', [CutiController::class, 'decline'])->name('decline');
+		Route::get('/accept/{id}', [CutiController::class, 'accept'])->name('accept');
+	});
 
-  });
 
-
-	Route::group(['prefix' => 'absen' , 'as' => 'absen.'] , function() {
+	Route::group(['prefix' => 'absen', 'as' => 'absen.'], function () {
 
 		Route::get('/history', [AbsenController::class, 'history'])->name('history');
+	});
 
-  });
 
+	Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
-	Route::group(['prefix' => 'user' , 'as' => 'user.'] , function() {
-		
 		Route::get('/list', [UserController::class, 'list'])->name('list');
 		Route::get('/add', [UserController::class, 'create'])->name('create');
 		Route::post('/add', [UserController::class, 'store'])->name('store');
 		Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
 		Route::put('/edit/{user}', [UserController::class, 'update'])->name('update');
 		Route::get('/history', [UserController::class, 'history'])->name('history');
-
-  });
+	});
 
 
 
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
-
 });
