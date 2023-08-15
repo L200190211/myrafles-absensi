@@ -41,7 +41,7 @@
 @push('js')
 <script>
   function showTime() {
-    let a = moment().format('H:m:s')
+    let a = moment().format('H:mm:s')
     document.getElementById('time').innerHTML = "<b>"+a+"</b>";
   }
 

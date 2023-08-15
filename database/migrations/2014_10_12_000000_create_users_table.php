@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('postal')->nullable();
             $table->text('about')->nullable();
+            $table->timestamp('lastLogin')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

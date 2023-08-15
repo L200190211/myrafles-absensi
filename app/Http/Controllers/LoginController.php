@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absen;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
@@ -27,7 +29,20 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            
             $request->session()->regenerate();
+
+            // cek jika check in tidak kosong
+            if($request->check != null ) {
+
+                User::where('id',Auth::user()->id)->update(['lastLogin' => $request->check]);
+                Absen::create(['users_id' => Auth::user()->id ,'tgl_absen' => $request->check,'ip_address' => $request->ip()]);
+            
+            } else {
+
+                Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => $request->check , 'ip_address' => $request->ip()]);
+            
+            }
 
             return redirect()->intended('dashboard');
         }
@@ -39,6 +54,7 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+        User::where('id',Auth::user()->id)->update(['lastLogin' => null]);
         Auth::logout();
 
         $request->session()->invalidate();

@@ -24,7 +24,10 @@
                                         <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" placeholder="Masukkan Password">
                                         @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
-
+                                    <div class="">
+                                        <input type="checkbox" id="time" name="check">
+                                        <label> Check in </label>
+                                    </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                                     </div>
@@ -44,3 +47,14 @@
     </section>
 </main>
 @endsection
+@push('js')
+<script>
+  function showTime() {
+    let a = moment().format('Y-MM-D H:m:s')
+    document.getElementById('time').value = a;
+  }
+
+  setInterval(showTime, 1000);
+
+</script>
+@endpush
