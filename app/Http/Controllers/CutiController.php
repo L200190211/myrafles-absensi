@@ -44,7 +44,7 @@ class CutiController extends Controller
     // Riwayat Cuti
     public function history()
     {
-        $data = DB::table('cutis')->orderByRaw('status ASC, created_at ASC')->paginate(25);
+        $data = DB::table('cutis')->orderByRaw('status ASC, created_at DESC')->paginate(25);
         return view('cuti.history', compact('data'));
     }
 

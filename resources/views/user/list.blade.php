@@ -9,7 +9,7 @@
 <h2>List User</h2>
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-    <a href="{{-- route('user.create') --}}" class="btx btn-third btn-id">+ User Baru</a>
+    <a href="{{ route('user.create') }}" class="btx btn-third btn-id">+ User Baru</a>
 </div>
 @endsection
 
@@ -27,9 +27,10 @@
         <thead>
             <tr>
                 <th scope="col" style="width:5%;">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Role</th>
-                <th scope="col">Cuti Diambil</th>
+                <th scope="col">Nama User</th>
+                <th scope="col">Posisi</th>
+                <th scope="col">Kota</th>
+                <th scope="col">Login Terakhir</th>
                 <th scope="col" style="width:5%;">Action</th>
             </tr>
         </thead>
@@ -45,7 +46,10 @@
 
                 </td>
                 <td>
-                    x Hari
+
+                </td>
+                <td>
+                    
                 </td>
                 <td>
                     <!-- Button trigger modal -->

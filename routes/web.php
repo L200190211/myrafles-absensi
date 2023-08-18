@@ -64,14 +64,13 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
 
 		Route::get('/list', [UserController::class, 'list'])->name('list');
-		Route::get('/add', [UserController::class, 'create'])->name('create');
+		Route::get('/add', [UserController::class, 'add'])->name('create');
 		Route::post('/add', [UserController::class, 'store'])->name('store');
 		Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
 		Route::put('/edit/{user}', [UserController::class, 'update'])->name('update');
 		Route::get('/history', [UserController::class, 'history'])->name('history');
+		Route::get('/change', [UserController::class, 'change'])->name('change');
 	});
-
-
 
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 });
