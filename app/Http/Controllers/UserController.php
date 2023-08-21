@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Carbon\Carbon;
+use Alert;
 
 class UserController extends Controller
 {
 
     public function list()
     {
-
-        return view('user.list');
+        $data = DB::table('users')->orderByRaw('id DESC')->paginate(25);
+        // dd($data);
+        return view('user.list', compact('data'));
     }
 
 

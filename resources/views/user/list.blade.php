@@ -17,7 +17,7 @@
 <div class="row" style="display: none;">
     <div class="col-lg-12">
         <div class="jumbotron">
-            <h3>History Cuti</h3>
+            <h3>List User</h3>
         </div>
     </div>
 </div>
@@ -36,11 +36,11 @@
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            {{-- @forelse ($data as $user) --}}
+            @forelse ($data as $user)
             <tr>
                 <td scope="row">{{ $i++ }}</td>
                 <td>
-
+                    {{ $user->firstname }}
                 </td>
                 <td>
 
@@ -49,7 +49,7 @@
 
                 </td>
                 <td>
-                    
+
                 </td>
                 <td>
                     <!-- Button trigger modal -->
@@ -77,11 +77,11 @@
 
                 </td>
             </tr>
-            {{-- @empty --}}
+            @empty
             <tr>
                 <td colspan="6" style="text-align: center;">User Kosong</td>
             </tr>
-            {{-- @endforelse --}}
+            @endforelse
         </tbody>
     </table>
 </div>
