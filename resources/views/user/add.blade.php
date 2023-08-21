@@ -74,7 +74,7 @@
             <div class="col-md-12 flex-center m-t-40">
                 <button type="submit" class="btn btn-submit btn-lg">Tambah User</button>
 
-                <span class="helptext m-l-20"><b class="red">Note :</b>
+                <span class="helptext m-l-20 inline"><b class="red">Note :</b>
                     User bisa melakukan reset password untuk mengganti password baru, Pass Otomatis Terisi : jacoidn</span>
             </div>
         </form>
