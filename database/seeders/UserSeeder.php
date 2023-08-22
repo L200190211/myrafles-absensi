@@ -20,11 +20,11 @@ class UserSeeder extends Seeder
         
         $admjaco = User::create([
             'id' =>1,
-            'name' => 'Admin JACO',
+            'firstname' => 'Admin JACO',
             'email' => 'admin@posjaco.com',
-            'usrn' => 'admjaco',
+            'username' => 'admjaco',
             'lastLogin' => now(),
-            'kota' => 'Surabaya',
+            'city' => 'Surabaya',
             'noWa' => '888999333',
             'password' => bcrypt('jacoidn')
         ]);
@@ -33,10 +33,10 @@ class UserSeeder extends Seeder
 
         $jaster = User::create([
                 'id' => 2,
-                'name' => 'JasterTeam',
+                'firstname' => 'JasterTeam',
                 'email' => 'jaster@superadmin.com',
-                'usrn' => 'jaster',
-                'kota' => 'Surabaya',
+                'username' => 'jaster',
+                'city' => 'Surabaya',
                 'noWa' => '888999333',
                 'lastLogin' => now(),
                 'password' => bcrypt('1234')
@@ -47,11 +47,11 @@ class UserSeeder extends Seeder
 
         $admin = User::create([
                 'id' => 3,
-                'name' => 'Robert Admin',
+                'firstname' => 'Robert Admin',
                 'email' => 'admin@admin.com',
-                'usrn' => 'admin',
+                'username' => 'admin',
                 'lastLogin' => now(),
-                'kota' => 'Surabaya',
+                'city' => 'Surabaya',
                 'noWa' => '888999333',
                 'password' => bcrypt('1234')
         ]);
