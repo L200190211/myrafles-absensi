@@ -17,13 +17,12 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             RoleSeeder::class,
-            UserSeeder::class
         ]);
-        // DB::table('users')->insert([
-        //     'username' => 'jaster',
-        //     'firstname' => 'Jasterweb',
-        //     'email' => 'web@jaster.co.id',
-        //     'password' => bcrypt('1234')]);
+        DB::table('users')->insert([
+            'username' => 'jaster',
+            'firstname' => 'Jasterweb',
+            'email' => 'web@jaster.co.id',
+            'password' => bcrypt('1234')]);
        
     }
 }

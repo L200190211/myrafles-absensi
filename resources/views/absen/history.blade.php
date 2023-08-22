@@ -22,66 +22,125 @@
     </div>
 </div>
 
-<div>
-    <table class="table table-hover table-striped table-responsive">
-        <thead>
-            <tr>
-                <th scope="col" style="width:5%;">No</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Role</th>
-                <th scope="col">Absen Diambil</th>
-                <th scope="col" style="width:5%;">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php $i = 1; ?>
-            {{-- @forelse ($data as $user) --}}
-            <tr>
-                <td scope="row">{{ $i++ }}</td>
-                <td>
-
-                </td>
-                <td>
-
-                </td>
-                <td>
-                    x Hari
-                </td>
-                <td>
-                    <!-- Button trigger modal -->
-                    <a href="#">
-                        <button type="button" class="btx btn-prev" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{--$user->id--}}"><i class="fa fa-eye" aria-hidden="true"></i> Lihat
-                        </button>
-                    </a>
-
-                    <!-- Modal -->
-                    <div class="modal fade cuti" id="staticBackdrop{{--$user->id--}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                        <i class="fa fa-times" aria-hidden="true" style="color: #000;"></i>
-                                    </button>
-                                </div>
-                                <div class="modal-body left-text mt-3">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat eros velit, pretium aliquet est pulvinar vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris malesuada urna vel lacus molestie finibus. Vivamus non nisi et massa varius malesuada vel a tortor. Maecenas lacus tellus, volutpat non enim id, porttitor egestas sem. Duis consequat nisl massa, vitae feugiat est porttitor vel. Vivamus vestibulum sapien sit amet nunc tempus viverra ultrices nec dui. Curabitur nisi metus, aliquet vitae mollis sit amet, dapibus vitae nibh. </p>
-                                </div>
-                            </div>
+<div class="card">
+                    <div class="card-body">
+                        <div class="container-calendar">
+                         <div id='calendar'></div>
                         </div>
-                    </div>
-
-                </td>
-            </tr>
-            {{-- @empty --}}
-            <tr>
-                <td colspan="6" style="text-align: center;">User Kosong</td>
-            </tr>
-            {{-- @endforelse --}}
-        </tbody>
-    </table>
+                  </div>
 </div>
 @endsection
 
 @push('js')
+<script>
+var calendar = $('#calendar').fullCalendar({
+    
+    editable:true,
+    header:{
+        left:'prev,next today',
+        center:'title',
+        right:'month,agendaWeek,agendaDay'
+    },
+    dropable:true,
+    events:'/full-calender',
+    selectable:true,
+    selectHelper: true,
+    select:function(start, end, allDay)
+    {
+        var title = prompt('Event Title:');
+
+        if(title)
+        {
+            var start = $.fullCalendar.formatDate(start, 'Y-MM-DD');
+
+            var end = $.fullCalendar.formatDate(end, 'Y-MM-DD');
+
+            $.ajax({
+                url:"/full-calender/action",
+                type:"POST",
+                data:{
+                    title: title,
+                    start: start,
+                    end: end,
+                    type: 'add'
+                },
+                success:function(data)
+                {
+                    calendar.fullCalendar('refetchEvents');
+                    alert("Event Created Successfully");
+                }
+            })
+        }
+    },
+    editable:true,
+    eventResize: function(event, delta)
+    {
+        var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD');
+        var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD');
+        var title = event.title;
+        var id = event.id;
+        $.ajax({
+            url:"/full-calender/action",
+            type:"POST",
+            data:{
+                title: title,
+                start: start,
+                end: end,
+                id: id,
+                type: 'update'
+            },
+            success:function(response)
+            {
+                calendar.fullCalendar('refetchEvents');
+                alert("Event Updated Successfully");
+            }
+        })
+    },
+    eventDrop: function(event, delta)
+    {
+
+        var start = $.fullCalendar.formatDate(event.start, 'Y-MM-DD');
+        var end = $.fullCalendar.formatDate(event.end, 'Y-MM-DD');
+        let draggableEl = document.getElementById('mydraggable');
+        var title = event.title;
+        var id = event.id;
+        $.ajax({
+            url:"/full-calender/action",
+            type:"POST",
+            data:{
+                title: title,
+                start: start,
+                end: end,
+                id: id,
+                type: 'update'
+            },
+            success:function(response)
+            {
+                calendar.fullCalendar('refetchEvents');
+                alert("Event Updated Successfully");
+            }
+        })
+    },
+    eventClick:function(event)
+    {
+        if(confirm("Are you sure you want to remove it?"))
+        {
+            var id = event.id;
+            $.ajax({
+                url:"/full-calender/action",
+                type:"POST",
+                data:{
+                    id:id,
+                    type:"delete"
+                },
+                success:function(response)
+                {
+                    calendar.fullCalendar('refetchEvents');
+                    alert("Event Deleted Successfully");
+                }
+            })
+        }
+    }
+});
+</script>
 @endpush

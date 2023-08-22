@@ -27,7 +27,6 @@ class LoginController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
-
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             
             $request->session()->regenerate();
@@ -36,7 +35,7 @@ class LoginController extends Controller
             if($request->check != null ) {
 
                 User::where('id',Auth::user()->id)->update(['lastLogin' => $request->check]);
-                Absen::create(['users_id' => Auth::user()->id ,'tgl_absen' => $request->check,'ip_address' => $request->ip()]);
+                Absen::create(['users_id' => Auth::user()->id ,'tgl_absen' => now()->format('d-m-Y'),'ip_address' => $request->ip()]);
             
             } else {
 
