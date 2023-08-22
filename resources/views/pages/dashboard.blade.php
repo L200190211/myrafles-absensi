@@ -7,8 +7,12 @@
 <div class="row">
     <div class="col-lg-7">
         <div class="jumbotron">
-            <h3>Welcome Back, John Doe 👋</h3>
+            <h3>Welcome Back, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
             <span><button class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i></button></span>
+        </div>
+        <div class="">
+            <input type="checkbox" id="timeIn" name="check">
+            <label> Check in </label>
         </div>
     </div>
     <div class="col-lg-5">
@@ -22,9 +26,10 @@
 <div class="row mt-7">
     <div class="col-lg-12">
         <ul class="navigate">
+            @role(['superadmin','admin'])
             <li><a href="{{route('absen.history')}}"><i class="fa fa-bar-chart"></i> History Absensi</a></li>
             <li><a href="{{route('cuti.history')}}"><i class="fa fa-bar-chart"></i> Kelola Cuti</a></li>
-            <li><a href="{{route('user.change')}}"><i class="fa fa-edit"></i> Ubah Password</a></li>
+            <li><a href="{{route('user.respass')}}"><i class="fa fa-edit"></i> Ubah Password</a></li>
             <li><a href="{{route('user.list')}}"><i class="fa fa-list"></i> Lists User</a></li>
             <li>
                 <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
@@ -33,6 +38,19 @@
                         <i class="fa fa-home"></i> <span>Log Out</span>
                     </a>
                 </form>
+                @endrole
+                @role(['staff'])
+            <li><a class="staff" href="{{route('absen.history')}}"><i class="fa fa-bar-chart"></i> History Absensi</a></li>
+            <li><a class="staff" href="{{route('cuti.history')}}"><i class="fa fa-bar-chart"></i> Kelola Cuti</a></li>
+            <li><a class="staff" href="{{route('user.respass')}}"><i class="fa fa-edit"></i> Ubah Password</a></li>
+            <li>
+                <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
+                    @csrf
+                    <a href="{{ route('logout') }}" class="staff" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link font-weight-bold px-0">
+                        <i class="fa fa-home"></i> <span>Log Out</span>
+                    </a>
+                </form>
+                @endrole
         </ul>
     </div>
 </div>

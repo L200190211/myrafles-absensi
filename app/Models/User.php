@@ -25,7 +25,9 @@ class User extends Authenticatable
         'password',
         'city',
         'noWa',
-        'lastLogin'
+        'lastLogin',
+        'alamat',
+        'about'
     ];
 
     /**

@@ -75,7 +75,7 @@
                 <button type="submit" class="btn btn-submit btn-lg">Tambah User</button>
 
                 <span class="helptext m-l-20 inline"><b class="red">Note :</b>
-                    User bisa melakukan reset password untuk mengganti password baru, Pass Otomatis Terisi : jacoidn</span>
+                    User bisa melakukan reset password untuk mengganti password baru, Pass Otomatis Terisi : myrafles</span>
             </div>
         </form>
     </div>

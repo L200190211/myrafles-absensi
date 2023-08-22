@@ -67,9 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/add', [UserController::class, 'add'])->name('create');
 		Route::post('/add', [UserController::class, 'store'])->name('store');
 		Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
-		Route::put('/edit/{user}', [UserController::class, 'update'])->name('update');
+		Route::post('/edit/{user}', [UserController::class, 'update'])->name('update');
 		Route::get('/history', [UserController::class, 'history'])->name('history');
-		Route::get('/change', [UserController::class, 'change'])->name('change');
+		Route::get('/reset', [UserController::class, 'resetView'])->name('respass');
+		Route::post('/change', [UserController::class, 'change'])->name('pass');
 	});
 
 	Route::post('logout', [LoginController::class, 'logout'])->name('logout');

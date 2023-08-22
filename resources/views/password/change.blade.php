@@ -16,19 +16,19 @@ smallwrap
 
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="{{-- route('user.store') --}}">
+        <form method="POST" action="{{ route('user.pass') }}">
             @csrf
             <div class="grid">
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label mb-3">Password Baru</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="pw1" name="pw1">
+                        <input type="password" class="form-control" name="new_password" autocomplete="current-password" required="" placeholder="*********">
                     </div>
                 </div>
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label mb-3">Ketik Ulang Password Baru</label>
                     <div class="input-group">
-                        <input type="password" class="form-control" id="pw2" name="pw2">
+                        <input type="password" class="form-control" name="new_confirm_password" autocomplete="current-password" required="" placeholder="*********">
                     </div>
                 </div>
             </div>
