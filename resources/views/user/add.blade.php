@@ -17,7 +17,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form method="POST" action="{{-- route('user.store') --}}">
+        <form method="POST" action="{{ route('user.store') }}">
             @csrf
             <div class="grid grid3">
                 <div class="formgroup">
@@ -45,7 +45,7 @@
                     <label for="exampleFormControlInput1" class="form-label">Email Aktif</label>
                     <div class="input-group">
                         <span class="input-group-text">@</span>
-                        <input type="text/" class="form-control rupiah" name="email" placeholder="Email Aktif...">
+                        <input type="text/" class="form-control" name="email" placeholder="Email Aktif...">
                     </div>
                 </div>
                 <div class="formgroup">
@@ -63,11 +63,11 @@
             <div class="grid grid2">
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label">Alamat</label>
-                    <textarea class="form-control" id="address" name="address" placeholder="Masukkan Rincian Cuti"></textarea>
+                    <textarea class="form-control" id="address" name="address" placeholder="Masukkan Alamat Anda"></textarea>
                 </div>
                 <div class="formgroup">
                     <label for="exampleInputEmail1" class="form-label">About</label>
-                    <textarea class="form-control" id="about" name="about" placeholder="Masukkan Rincian Cuti"></textarea>
+                    <textarea class="form-control" id="about" name="about" placeholder="Masukkan Rincian Anda"></textarea>
                 </div>
             </div>
 

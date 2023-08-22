@@ -43,13 +43,19 @@
                     {{ $user->firstname }}
                 </td>
                 <td>
-
+                    @if ($user->hasRole('superadmin'))
+                    Superadmin
+                    @elseif ($user->hasRole('admin'))
+                    Admin
+                    @else
+                    Staff
+                    @endif
                 </td>
                 <td>
-
+                    {{ $user->city }}
                 </td>
                 <td>
-
+                    {{ Carbon\Carbon::parse($user->lastLogin)->locale('id')->diffForHumans(null, true) . ' lalu' }}
                 </td>
                 <td>
                     <!-- Button trigger modal -->

@@ -22,6 +22,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('noWa')->nullable();
             $table->string('city')->nullable();
+            $table->string('alamat')->nullable();
+            $table->string('about')->nullable();
             $table->timestamp('lastLogin')->nullable();
             $table->rememberToken();
             $table->timestamps();
