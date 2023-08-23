@@ -57,6 +57,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::group(['prefix' => 'absen', 'as' => 'absen.'], function () {
 
+		Route::get('/absensi', [AbsenController::class, 'absensi'])->name('absensi');
 		Route::get('/history', [AbsenController::class, 'history'])->name('history');
 	});
 
