@@ -33,7 +33,7 @@ class UserController extends Controller
             'firstname' => $request->nama,
             'username' => $request->usrn,
             'email' => $request->email,
-            'password' => bcrypt('myrafles'),
+            'password' => '$2y$10$gOwNzY8Xcd0FrO4GbFS4Me9r2AuOe4iiCBmwYrg8UakmDNvG0o0He',
             'noWa' => $request->noWa,
             'lastLogin' => now(),
             'city' => $request->kota,

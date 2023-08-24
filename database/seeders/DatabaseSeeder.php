@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'firstname' => 'Jasterweb',
             'email' => 'web@jaster.co.id',
             'password' => bcrypt('1234')]);
+
+        DB::table('users')->insert([
+            'username' => 'rafles',
+            'firstname' => 'rafles',
+            'email' => 'rafles@rafles.m',
+            'password' => bcrypt('1234')]);
        
     }
 }

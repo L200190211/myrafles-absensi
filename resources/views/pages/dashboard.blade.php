@@ -7,12 +7,14 @@
 <div class="row">
     <div class="col-lg-7">
         <div class="jumbotron">
-            <h3>Welcome Back, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
-            <span><button class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i></button></span>
-        </div>
-        <div class="">
-            <input type="checkbox" id="timeIn" name="check">
-            <label> Check in </label>
+            <div class="item_jum">
+                <h3>Welcome Back, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
+                <span><button class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i></button></span>
+            </div>
+
+            <button type="submit" class="btx btn-warning text-dark"><i class="fa fa-door-open" aria-hidden="true"></i> Check IN</button>
+
+
         </div>
     </div>
     <div class="col-lg-5">

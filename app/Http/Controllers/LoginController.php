@@ -6,6 +6,7 @@ use App\Models\Absen;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
 
@@ -27,6 +28,7 @@ class LoginController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
+
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             
             $request->session()->regenerate();
@@ -40,7 +42,7 @@ class LoginController extends Controller
 
                     if($log->created_at->format('d m Y') == now()->format('d m Y')) { 
 
-                        Absen::where('users_id',$log->id)->update(['tgl_absen' => now()]);
+                        Absen::where('id',$log->id)->update(['tgl_absen' => now()]);
 
                     } else {
                         Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
@@ -59,7 +61,7 @@ class LoginController extends Controller
 
                     if($log->created_at->format('d m Y') == now()->format('d m Y')) { 
 
-                        Absen::where('users_id',$log->id)->update(['tgl_absen' => now()]);
+                        Absen::where('id',$log->id)->update(['tgl_absen' => now()]);
 
                     } else {
                         Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
