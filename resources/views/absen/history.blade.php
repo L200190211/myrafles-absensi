@@ -18,6 +18,14 @@
 @role('superadmin')
 <div class="filter">
 <form method="GET" action="{{route('absen.filter')}}" class="filter_form">
+            <div class="formgroup_filter m-0">
+                <label for="exampleFormControlInput1" class="form-label m-0">User</label>
+                <select class="form-control" name="userID">
+                @foreach ($user as $users)
+                    <option value="{{$users->id}}">{{$users->firstname}}</option>
+                @endforeach
+                </select>
+            </div>
         <div class="formgroup_filter m-0">
                 <label for="exampleFormControlInput1" class="form-label m-0">Bulan</label>
                 <select class="form-control" name="bulan">
@@ -42,7 +50,7 @@
 <div class="row" style="display: none;">
     <div class="col-lg-12">
         <div class="jumbotron">
-            <h3>History Cuti</h3>
+            <h3>History Absen</h3>
         </div>
     </div>
 </div>

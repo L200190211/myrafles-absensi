@@ -83,8 +83,8 @@ class UserController extends Controller
             'new_confirm_password' => ['same:new_password'],
         ]);
 
-        User::find(auth()->user()->id)->update(['password' => $request->new_password]);
-        // Alert::success('Berhasil', 'Password telah berubah');
+        User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
+        Alert::success('Berhasil', 'Password telah berubah');
         return redirect()->route('user.list');
     }
 }

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 use App\Models\Absen;
+use App\Models\User;
 use Carbon\CarbonPeriod;
 use Illuminate\Support\Facades\Response;
 
@@ -16,7 +17,8 @@ class AbsenController extends Controller
     public function history() {
         
         $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
-        return view('absen.history',compact('month'));
+        $user = User::all();
+        return view('absen.history',compact('month','user'));
 
     }
 
@@ -26,7 +28,7 @@ class AbsenController extends Controller
         $end = Carbon::now();
 
         $query = Absen::where('users_id',auth()->user()->id)->whereBetween('tgl_absen', [$start, $end])->get();
-
+        $events = [];
         foreach($query as $absensi ) {
             $events[]= [
                 "title" => Carbon::parse($absensi->created_at)->format('H:i'),
@@ -42,11 +44,20 @@ class AbsenController extends Controller
 
         $m = $request->bulan;
         $y = $request->tahun;
-        $filters = Absen::with('users')->whereMonth('created_at', $m)
-            ->whereYear('created_at', $y)
-            ->get();
-        
-        return view('absen.filter',compact('filters'));
+        $user = User::all();
+        $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
+
+        $filters = Absen::where('users_id',$request->userID)->whereMonth('created_at', $m)->whereYear('created_at', $y)->get();
+        $events = [];
+        foreach($filters as $absensi ) {
+            $events[]= [
+                "title" => Carbon::parse($absensi->created_at)->format('H:i'),
+                "start"=> Carbon::parse($absensi->created_at)->format('Y-m-d'),                   
+            ]; 
+        }
+
+       $data = Response::make($events, 200, array('Content-Type'=>'application/json; charset=utf-8'));
+        return view('absen.filter',compact('filters','user','month','data'));
 
     }
 
