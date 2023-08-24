@@ -78,6 +78,7 @@
                                 <div class="modal-body left-text mt-3">
                                     <p>{{ $cuti->rincian }}</p>
                                 </div>
+                                @role(['superadmin','admin'])
                                 @if ($cuti->status == 0)
                                 <div class="modal-footer mb-3">
                                     <a href="{{ route('cuti.decline', $cuti->id) }}" type="button" class="btn btn-third w25">Decline </a>
@@ -85,6 +86,7 @@
                                 </div>
                                 @else
                                 @endif
+                                @endrole
                             </div>
                         </div>
                     </div>

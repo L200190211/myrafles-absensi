@@ -33,7 +33,7 @@ class UserController extends Controller
             'firstname' => $request->nama,
             'username' => $request->usrn,
             'email' => $request->email,
-            'password' => bcrypt('jacoidn'),
+            'password' => bcrypt('myrafles'),
             'noWa' => $request->noWa,
             'lastLogin' => now(),
             'city' => $request->kota,
@@ -47,18 +47,44 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-
-        return view('user.edit');
+        $data = User::with('roles')->find($user->id);
+        $roles = Role::get();
+        return view('user.edit', compact('data', 'roles'));
     }
 
     public function update(Request $request, User $user)
     {
-        //
+        $user->update([
+            'firstname' => $request->nama,
+            'username' => $request->usrn,
+            'email' => $request->email,
+            'noWa' => $request->noWa,
+            'city' => $request->kota,
+            'alamat' => $request->address,
+            'about' => $request->about,
+        ]);
+
+        $user->syncRoles($request->idRole);
+
+        Alert::success('User Telah Diperbarui');
+        return redirect()->route('user.list');
     }
 
     // Change Password
-    public function change()
+    public function resetView()
     {
         return view('password.change');
+    }
+
+    public function change(Request $request)
+    {
+        $request->validate([
+            'new_password' => ['required'],
+            'new_confirm_password' => ['same:new_password'],
+        ]);
+
+        User::find(auth()->user()->id)->update(['password' => $request->new_password]);
+        // Alert::success('Berhasil', 'Password telah berubah');
+        return redirect()->route('user.list');
     }
 }

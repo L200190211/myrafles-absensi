@@ -38,7 +38,7 @@
             <?php $i = 1; ?>
             @forelse ($data as $user)
             <tr>
-                <td scope="row">{{ $i++ }}</td>
+                <td scope="row" style="padding: 1.75rem 2rem !important;">{{ $i++ }}</td>
                 <td>
                     {{ $user->firstname }}
                 </td>
@@ -58,29 +58,7 @@
                     {{ Carbon\Carbon::parse($user->lastLogin)->locale('id')->diffForHumans(null, true) . ' lalu' }}
                 </td>
                 <td>
-                    <!-- Button trigger modal -->
-                    <a href="#">
-                        <button type="button" class="btx btn-prev" data-bs-toggle="modal" data-bs-target="#staticBackdrop{{--$user->id--}}"><i class="fa fa-eye" aria-hidden="true"></i> Lihat
-                        </button>
-                    </a>
-
-                    <!-- Modal -->
-                    <div class="modal fade cuti" id="staticBackdrop{{--$user->id--}}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel"></h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                                        <i class="fa fa-times" aria-hidden="true" style="color: #000;"></i>
-                                    </button>
-                                </div>
-                                <div class="modal-body left-text mt-3">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec placerat eros velit, pretium aliquet est pulvinar vel. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris malesuada urna vel lacus molestie finibus. Vivamus non nisi et massa varius malesuada vel a tortor. Maecenas lacus tellus, volutpat non enim id, porttitor egestas sem. Duis consequat nisl massa, vitae feugiat est porttitor vel. Vivamus vestibulum sapien sit amet nunc tempus viverra ultrices nec dui. Curabitur nisi metus, aliquet vitae mollis sit amet, dapibus vitae nibh. </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <a href="{{ route('user.edit', $user->id) }}" class="btx btn-prev"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
                 </td>
             </tr>
             @empty

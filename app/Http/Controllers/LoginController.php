@@ -33,13 +33,44 @@ class LoginController extends Controller
 
             // cek jika check in tidak kosong
             if($request->check != null ) {
+               
+                $log = Absen::where('users_id' ,Auth::user()->id)->latest()->first(); 
 
-                User::where('id',Auth::user()->id)->update(['lastLogin' => $request->check]);
-                Absen::create(['users_id' => Auth::user()->id ,'tgl_absen' => now()->format('d-m-Y'),'ip_address' => $request->ip()]);
+                if($log != null ) {
+
+                    if($log->created_at->format('d m Y') == now()->format('d m Y')) { 
+
+                        Absen::where('users_id',$log->id)->update(['tgl_absen' => now()]);
+
+                    } else {
+                        Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
+                    }
+
+                } else {
+
+                    Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
+
+                }
             
             } else {
+                $log = Absen::where('users_id' ,Auth::user()->id)->latest()->first(); 
 
-                Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => $request->check , 'ip_address' => $request->ip()]);
+                if($log != null ) {
+
+                    if($log->created_at->format('d m Y') == now()->format('d m Y')) { 
+
+                        Absen::where('users_id',$log->id)->update(['tgl_absen' => now()]);
+
+                    } else {
+                        Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
+                    }
+
+                } else {
+
+                    Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
+
+                }
+                
             
             }
 
