@@ -78,7 +78,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,basicWeek,basicDay'
+                right: ''
             },
             locale:'id',
             editable: false,

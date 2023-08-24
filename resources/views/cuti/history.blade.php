@@ -10,7 +10,7 @@
 <h2>History Cuti</h2>
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-    <a href="{{ route('cuti.create') }}" class="btx btn-third btn-id">+ Buat Cuti</a>
+    <a href="{{ route('cuti.create') }}" class="btx btn-secondary btn-id">+ Buat Cuti</a>
 </div>
 @endsection
 
@@ -48,7 +48,7 @@
                 </td>
                 <td>
                     @if ($cuti->status == 0)
-                    <p class="badge-primary">Menunggu</p>
+                    <p class="badge-primary">Pending</p>
                     @elseif ($cuti->status == 1)
                     <p class="badge-success">Diterima</p>
                     @else
@@ -75,7 +75,7 @@
                                         <i class="fa fa-times" aria-hidden="true" style="color: #000;"></i>
                                     </button>
                                 </div>
-                                <div class="modal-body left-text mt-3">
+                                <div class="modal-body left-text">
                                     <p>{{ $cuti->rincian }}</p>
                                 </div>
                                 @role(['superadmin','admin'])

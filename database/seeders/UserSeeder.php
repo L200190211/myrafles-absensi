@@ -15,14 +15,31 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        
 
-        $jaster = User::create([
-            'username' => 'jaster',
-            'firstname' => 'Jasterweb',
-            'email' => 'web@jaster.co.id',
+        
+        $admrafles = User::create([
+            'id' =>1,
+            'firstname' => 'Admin Rafles',
+            'email' => 'admin@rafles.id',
+            'username' => 'admrafles',
+            'lastLogin' => now(),
+            'city' => 'Surabaya',
+            'noWa' => '888999333',
             'password' => bcrypt('1234')
         ]);
 
-        $jaster->assignRole('superadmin');
+        $admrafles->assignRole('superadmin');
+
+        $jaster = User::create([
+                'id' => 2,
+                'firstname' => 'JasterTeam',
+                'email' => 'jaster@jaster.co.id',
+                'username' => 'jaster',
+                'city' => 'Surabaya',
+                'noWa' => '888999333',
+                'lastLogin' => now(),
+                'password' => bcrypt('1234')
+        ]);
       }
 }

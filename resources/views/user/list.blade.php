@@ -9,7 +9,7 @@
 <h2>List User</h2>
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-    <a href="{{ route('user.create') }}" class="btx btn-third btn-id">+ User Baru</a>
+    <a href="{{ route('user.create') }}" class="btx btn-secondary btn-id">+ User Baru</a>
 </div>
 @endsection
 

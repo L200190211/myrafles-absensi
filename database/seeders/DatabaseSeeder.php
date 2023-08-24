@@ -15,20 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         $this->call([
             RoleSeeder::class,
+            UserSeeder::class,
         ]);
-        DB::table('users')->insert([
-            'username' => 'jaster',
-            'firstname' => 'Jasterweb',
-            'email' => 'web@jaster.co.id',
-            'password' => bcrypt('1234')]);
-
-        DB::table('users')->insert([
-            'username' => 'rafles',
-            'firstname' => 'rafles',
-            'email' => 'rafles@rafles.m',
-            'password' => bcrypt('1234')]);
-       
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
     }
 }

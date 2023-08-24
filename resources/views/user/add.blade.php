@@ -8,8 +8,7 @@
 @section('titlepage')
 <h2>Tambah User</h2>
 <div class="title-right">
-    <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
-    <a href="{{ route('user.list') }}" class="btx btn-third btn-id">List User</a>
+    <a href="{{ route('user.list') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
 </div>
 @endsection
 
