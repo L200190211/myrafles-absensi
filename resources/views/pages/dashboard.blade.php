@@ -25,37 +25,33 @@
     </div>
 </div>
 
-<div class="row mt-7">
-    <div class="col-lg-12">
         <ul class="navigate">
             @role(['superadmin','admin'])
-            <li><a href="{{route('absen.history')}}"><i class="fa fa-bar-chart"></i> History Absensi</a></li>
-            <li><a href="{{route('cuti.history')}}"><i class="fa fa-bar-chart"></i> Kelola Cuti</a></li>
-            <li><a href="{{route('user.respass')}}"><i class="fa fa-edit"></i> Ubah Password</a></li>
-            <li><a href="{{route('user.list')}}"><i class="fa fa-list"></i> Lists User</a></li>
+            <li><a href="{{route('absen.history')}}"><img src="{{ asset('assets/img/history.png') }}"/> History Absensi</a></li>
+            <li><a href="{{route('cuti.history')}}"><img src="{{ asset('assets/img/cuti.png') }}"/> Kelola Cuti</a></li>
+            <li><a href="{{route('user.respass')}}"><img src="{{ asset('assets/img/pass.png') }}"/> Ubah Password</a></li>
+            <li><a href="{{route('user.list')}}"><img src="{{ asset('assets/img/user.png') }}"/> List User</a></li>
             <li>
                 <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                     @csrf
                     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link font-weight-bold px-0">
-                        <i class="fa fa-home"></i> <span>Log Out</span>
+                        <img src="{{ asset('assets/img/logout.png') }}"/> <span>Log Out</span>
                     </a>
                 </form>
                 @endrole
                 @role(['staff'])
-            <li><a class="staff" href="{{route('absen.history')}}"><i class="fa fa-bar-chart"></i> History Absensi</a></li>
-            <li><a class="staff" href="{{route('cuti.history')}}"><i class="fa fa-bar-chart"></i> Kelola Cuti</a></li>
-            <li><a class="staff" href="{{route('user.respass')}}"><i class="fa fa-edit"></i> Ubah Password</a></li>
+            <li><a class="staff" href="{{route('absen.history')}}"><img src="{{ asset('assets/img/history.png') }}"/> History Absensi</a></li>
+            <li><a class="staff" href="{{route('cuti.history')}}"><img src="{{ asset('assets/img/cuti.png') }}"/> Kelola Cuti</a></li>
+            <li><a class="staff" href="{{route('user.respass')}}"><img src="{{ asset('assets/img/pass.png') }}"/> Ubah Password</a></li>
             <li>
                 <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
                     @csrf
                     <a href="{{ route('logout') }}" class="staff" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link font-weight-bold px-0">
-                        <i class="fa fa-home"></i> <span>Log Out</span>
+                        <img src="{{ asset('assets/img/logout.png') }}"/> <span>Log Out</span>
                     </a>
                 </form>
                 @endrole
         </ul>
-    </div>
-</div>
 @endsection
 
 @push('js')
