@@ -14,7 +14,7 @@ class UserController extends Controller
 
     public function list()
     {
-        $data = User::with('roles')->orderByRaw('id DESC')->paginate(25);
+        $data = User::with('roles')->where('status','1')->orderByRaw('id DESC')->paginate(15);
         // dd($data);
         return view('user.list', compact('data'));
     }
@@ -86,5 +86,16 @@ class UserController extends Controller
         User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
         Alert::success('Berhasil', 'Password telah berubah');
         return redirect()->route('user.list');
+    }
+
+    public function delete($id)
+    {
+        $data = User::findOrFail($id);
+        if ($data->status == "1") {
+            $data->status = "0";
+        }
+        $data->save();
+        Alert::success('User Dihapus');
+        return redirect()->back();
     }
 }

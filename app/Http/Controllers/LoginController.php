@@ -31,27 +31,27 @@ class LoginController extends Controller
             'username' => ['required'],
             'password' => ['required'],
         ]);
+
         $allowedIPRange = '127.0.0.1';
         
+        // ip addr
         if($allowedIPRange == $request->ip()) {
 
+            // user do login
             if (Auth::attempt($credentials)) {
     
                 $request->session()->regenerate();
 
-            
-                    
-                    // cek jika check in tidak kosong
+                        // cek jika check in tidak kosong
                         if($request->check != null ) {
                         
                             $log = Absen::where('users_id' ,Auth::user()->id)->latest()->first(); 
 
+                            // check data ada atau kosong
                             if($log != null ) {
 
-                                if($log->created_at->format('d m Y') == now()->format('d m Y')) { 
-
+                                if ( $log->created_at->format('d m Y') == now()->format('d m Y') ) { 
                                     Absen::where('id',$log->id)->update(['tgl_absen' => now()]);
-
                                 } else {
                                     Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
                                 }
@@ -62,27 +62,7 @@ class LoginController extends Controller
 
                             }
                         
-                        } else {
-                            $log = Absen::where('users_id' ,Auth::user()->id)->latest()->first(); 
-
-                            if($log != null ) {
-
-                                if($log->created_at->format('d m Y') == now()->format('d m Y')) { 
-
-                                    Absen::where('id',$log->id)->update(['tgl_absen' => now()]);
-
-                                } else {
-                                    Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
-                                }
-
-                            } else {
-
-                                Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
-
-                            }
-                            
-                        
-                        }
+                        } else {}
 
                     return redirect()->intended('dashboard');
                 

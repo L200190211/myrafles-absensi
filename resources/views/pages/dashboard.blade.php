@@ -11,8 +11,26 @@
                 <h3>Welcome Back, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
                 <span><button class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i></button></span>
             </div>
-
-            <button type="submit" class="btx btn-warning text-dark"><i class="fa fa-door-open" aria-hidden="true"></i> Check IN</button>
+            @if ($absen->created_at ?? null != null) 
+                @if ($absen->created_at->format('H:i') < '10:00' )
+                    <p class="text-white">Good Joob ! </p>
+                @else
+                    <p class="text-white">AGAK TELAT YE ! </p>
+                @endif
+                   
+            @else    
+                <p class="text-white">Belum Check in Ya ?</p>
+            @endif
+            
+             @if ($absen->created_at ?? null != null)
+                   
+             @else
+              <form action="{{route('absen.checkin')}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="waktu" id="waktu">
+                        <button type="submit" class="btx btn-warning text-dark"><i class="fa fa-door-open" aria-hidden="true"></i> Check IN</button>
+                    </form>
+             @endif
 
 
         </div>
@@ -20,7 +38,8 @@
     <div class="col-lg-5">
         <div class="liveclock">
             <div id="time"></div>
-            <span>WIB / {{now()->format('j F Y');}}</span>
+            <span style="margin:17px 0;">{{ Carbon\Carbon::parse(now())->locale('id')->translatedFormat('l') }}</span>
+            <span style="margin:0">WIB / {{now()->format('j F Y');}}</span>
         </div>
     </div>
 </div>
@@ -58,7 +77,9 @@
 <script>
     function showTime() {
         let a = moment().format('H:mm:s')
+        let formated = moment().format("YYYY-MM-DD HH:mm:ss")
         document.getElementById('time').innerHTML = "<b>" + a + "</b>";
+        document.getElementById('waktu').value = formated;
     }
 
     setInterval(showTime, 1000);

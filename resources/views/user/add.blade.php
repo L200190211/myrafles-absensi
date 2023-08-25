@@ -31,9 +31,9 @@
                     <label for="exampleFormControlInput1" class="form-label">Level User</label>
                     <select name="idRole" class="form-control js-example-responsive" autocomplete="off">
                         <option selected disabled>--- Pilih Salah Satu ---</option>
-                        {{-- @if (auth()->user()->hasRole('superadmin')) --}}
+                        @if (auth()->user()->hasRole('superadmin'))
                         <option value="1">Superadmin</option>
-                        {{-- @endif --}}
+                        @endif
                         <option value="2">Admin</option>
                         <option value="3">Staff</option>
                     </select>

@@ -8,7 +8,7 @@ use Carbon\Carbon;
 
 use App\Models\Absen;
 use App\Models\User;
-use Carbon\CarbonPeriod;
+use Alert;
 use Illuminate\Support\Facades\Response;
 
 class AbsenController extends Controller
@@ -56,9 +56,19 @@ class AbsenController extends Controller
             ]; 
         }
 
-       $data = Response::make($events, 200, array('Content-Type'=>'application/json; charset=utf-8'));
+    //    $data =  Response::make($events, 200, array('Content-Type'=>'application/json; charset=utf-8'));
+       $data =  response()->json($events);
         return view('absen.filter',compact('filters','user','month','data'));
 
+    }
+
+
+    public function checkin(Request $request) {
+
+        Absen::create(['users_id' => auth()->user()->id , 'tgl_absen' => $request->waktu , 'ip_address' => $request->ip()]);
+        Alert::success('Check in berhasil');
+        return redirect()->back();
+        
     }
 
 }

@@ -36,9 +36,9 @@
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            @forelse ($data as $user)
+            @forelse ($data as $key => $user)
             <tr>
-                <td scope="row" style="padding: 1.75rem 2rem !important;">{{ $i++ }}</td>
+                <td scope="row" style="padding: 1.75rem 2rem !important;">{{ $data->firstItem() + $key }}</td>
                 <td>
                     {{ $user->firstname }}
                 </td>
@@ -59,6 +59,7 @@
                 </td>
                 <td>
                     <a href="{{ route('user.edit', $user->id) }}" class="btx btn-prev"><i class="fa fa-edit" aria-hidden="true"></i> Edit</a>
+                    <a href="{{ route('user.delete', $user->id) }}" class="btx btn-third del-btn"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
             @empty
@@ -68,8 +69,34 @@
             @endforelse
         </tbody>
     </table>
+        {{$data->links()}}
 </div>
 @endsection
 
 @push('js')
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.del-btn').on('click', function(event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+
+            Swal.fire({
+                title: 'Hapus User',
+                text: "Yakin Hapus User Ini?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Iya',
+                cancelButtonText: 'Tidak Jadi',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = url;
+                }
+            })
+        });
+    })
+</script>
+
 @endpush

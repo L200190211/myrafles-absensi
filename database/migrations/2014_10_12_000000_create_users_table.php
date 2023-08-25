@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('about')->nullable();
             $table->timestamp('lastLogin')->nullable();
+            $table->string('status',3)->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

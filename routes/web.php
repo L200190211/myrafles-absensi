@@ -57,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::group(['prefix' => 'absen', 'as' => 'absen.'], function () {
 
+
+		Route::post('/checkin', [AbsenController::class, 'checkin'])->name('checkin');
 		Route::get('/absensi/filter', [AbsenController::class, 'filter'])->name('filter');
 		Route::get('/absensi', [AbsenController::class, 'absensi'])->name('absensi');
 		Route::get('/history', [AbsenController::class, 'history'])->name('history');
@@ -64,7 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 
 	Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
-
+		
+		Route::get('/delete/{id}', [UserController::class, 'delete'])->name('delete');
 		Route::get('/list', [UserController::class, 'list'])->name('list');
 		Route::get('/add', [UserController::class, 'add'])->name('create');
 		Route::post('/add', [UserController::class, 'store'])->name('store');

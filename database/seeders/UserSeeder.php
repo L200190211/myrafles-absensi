@@ -41,5 +41,31 @@ class UserSeeder extends Seeder
                 'lastLogin' => now(),
                 'password' => bcrypt('1234')
         ]);
+        $jaster->assignRole('superadmin');
+
+
+        $admin = User::create([
+            'id' => 3,
+            'firstname' => 'admin',
+            'email' => 'admin@admin.co.id',
+            'username' => 'admin',
+            'city' => 'Surabaya',
+            'noWa' => '888999333',
+            'lastLogin' => now(),
+            'password' => bcrypt('1234')
+        ]);
+        $admin->assignRole('admin');
+
+        $staff = User::create([
+            'id' => 4,
+            'firstname' => 'staff',
+            'email' => 'staff@staff.co.id',
+            'username' => 'staff',
+            'city' => 'Surabaya',
+            'noWa' => '888999333',
+            'lastLogin' => now(),
+            'password' => bcrypt('1234')
+        ]);
+        $staff->assignRole('staff');
       }
 }

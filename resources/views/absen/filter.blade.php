@@ -60,6 +60,7 @@
                         <div class="container-calendar">
                          <div id='calendar'></div>
                         </div>
+                       {{json_encode($data)}}
                   </div>
 </div>
 @endsection
@@ -67,14 +68,15 @@
 @push('js')
 <script>
     var events = '';
-    let dataView ="{{$data}}";
-    console.log(dataView);
+    let dataView = "{{json_encode($data)}}";
+    console.log(dataView)
     $.ajax({
       url: '/absen/absensi/filter',
       dataType: 'json',
       type: 'GET',
       success: function(data) {
-        events = JSON.stringify(data);
+        events = JSON.stringify(dataView);
+        console.log(data)
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -89,7 +91,6 @@
             events: JSON.parse(events)
         });
       } ,error: function(xhr, status, error) {
-      console.log(events)
         },
     });
 </script>
