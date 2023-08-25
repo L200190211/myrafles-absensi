@@ -15,6 +15,7 @@
                                 <p class="mb-0">Masukkan User dan Password</p>
                             </div>
                             <div class="card-body">
+                             @error('ip') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                 <form role="form" method="POST" action="{{ route('login.perform') }}">
                                     @csrf
                                     @method('post')
