@@ -25,6 +25,8 @@ class UserSeeder extends Seeder
             'username' => 'admrafles',
             'lastLogin' => now(),
             'city' => 'Surabaya',
+            'alamat' => 'Surabaya',
+            'jabatan' => 'Arsitek',
             'noWa' => '888999333',
             'password' => bcrypt('1234')
         ]);
@@ -38,6 +40,8 @@ class UserSeeder extends Seeder
                 'username' => 'jaster',
                 'city' => 'Surabaya',
                 'noWa' => '888999333',
+                'jabatan' => 'Arsitek',
+                'alamat' => 'Surabaya',
                 'lastLogin' => now(),
                 'password' => bcrypt('1234')
         ]);
@@ -50,7 +54,9 @@ class UserSeeder extends Seeder
             'email' => 'admin@admin.co.id',
             'username' => 'admin',
             'city' => 'Surabaya',
+            'jabatan' => 'Arsitek',
             'noWa' => '888999333',
+            'alamat' => 'Surabaya',
             'lastLogin' => now(),
             'password' => bcrypt('1234')
         ]);
@@ -62,6 +68,8 @@ class UserSeeder extends Seeder
             'email' => 'staff@staff.co.id',
             'username' => 'staff',
             'city' => 'Surabaya',
+            'alamat' => 'Surabaya',
+            'jabatan' => 'Arsitek',
             'noWa' => '888999333',
             'lastLogin' => now(),
             'password' => bcrypt('1234')

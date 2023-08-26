@@ -29,7 +29,8 @@
                 <th scope="col" style="width:5%;">No</th>
                 <th scope="col">Nama User</th>
                 <th scope="col">Posisi</th>
-                <th scope="col">Kota</th>
+                <th scope="col">Alamat</th>
+                <th scope="col">Jabatan</th>
                 <th scope="col">Login Terakhir</th>
                 <th scope="col" style="width:5%;">Action</th>
             </tr>
@@ -52,7 +53,10 @@
                     @endif
                 </td>
                 <td>
-                    {{ $user->city }}
+                    {{ $user->jabatan }}
+                </td>
+                <td>
+                    {{ $user->alamat }}
                 </td>
                 <td>
                     {{ Carbon\Carbon::parse($user->lastLogin)->locale('id')->diffForHumans(null, true) . ' lalu' }}

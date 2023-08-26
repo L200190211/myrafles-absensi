@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('noWa')->nullable();
             $table->string('city')->nullable();
             $table->string('alamat')->nullable();
-            $table->string('about')->nullable();
+            $table->string('jabatan')->nullable();
             $table->timestamp('lastLogin')->nullable();
             $table->string('status',3)->default('1');
             $table->rememberToken();
