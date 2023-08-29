@@ -9,7 +9,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        $absen = Absen::where('users_id',auth()->user()->id)->latest()->first();
+        $absen = Absen::where('users_id',auth()->user()->id)->whereDate('created_at',today())->latest()->first();
+    
         return view('pages.dashboard',compact('absen'));
     }
 }

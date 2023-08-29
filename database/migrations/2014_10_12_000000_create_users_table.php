@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('jabatan')->nullable();
             $table->timestamp('lastLogin')->nullable();
             $table->string('status',3)->default('1');
+            $table->string('tokenCuti',3)->default('12');
             $table->rememberToken();
             $table->timestamps();
         });
