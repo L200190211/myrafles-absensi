@@ -9,12 +9,23 @@
         <div class="jumbotron">
             <div class="item_jum">
                 <h3>Welcome Back, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
-                <span><button class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i></button></span>
+                @php
+                $showNotif = auth()->user()->unreadNotifications()->latest()->paginate(5);
+                @endphp
+                
+                <span><a href="{{route('home.notif')}}" class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i>
+
+                @if (count($showNotif ?? ''> 0))
+                    
+                <span class="badge badge-danger">{{count($showNotif)}}</span>
+                @endif
+                
+                </a></span>
             </div>
             @if ($absen->created_at ?? null != null)
             @if ($absen->created_at->format('H:i') < '10:00' ) <p class="text-white">Good Joob ! </p>
                 @else
-                <p class="text-white">AGAK TELAT YE ! </p>
+                <p class="text-white">AGAK TELAT YA ! </p>
                 @endif
 
                 @else
@@ -37,8 +48,7 @@
     <div class="col-lg-5">
         <div class="liveclock">
             <div id="time"></div>
-            <span style="margin:17px 0;">{{ Carbon\Carbon::parse(now())->locale('id')->translatedFormat('l') }}</span>
-            <span style="margin:0">WIB / {{now()->format('j F Y');}}</span>
+            <span style="margin:17px 0;">{{ Carbon\Carbon::parse(now())->locale('id')->translatedFormat('l') }} , {{now()->format('j F Y');}}</span>
         </div>
     </div>
 </div>

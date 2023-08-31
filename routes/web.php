@@ -45,6 +45,9 @@ Route::get('/dashboard', [HomeController::class, 'index'])->name('home')->middle
 
 Route::group(['middleware' => 'auth'], function () {
 
+	Route::post('/mark-as-read', [App\Http\Controllers\HomeController::class, 'markAsNotification'])->name('markAsNotification');
+
+
 	Route::group(['prefix' => 'cuti', 'as' => 'cuti.'], function () {
 
 		Route::get('/add', [CutiController::class, 'create'])->name('create');
@@ -53,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/decline/{id}', [CutiController::class, 'decline'])->name('decline');
 		Route::get('/accept/{id}', [CutiController::class, 'accept'])->name('accept');
 	});
+
+	Route::get('/notifications', [HomeController::class, 'notif'])->name('home.notif');
 
 
 	Route::group(['prefix' => 'absen', 'as' => 'absen.'], function () {

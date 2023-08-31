@@ -17,7 +17,7 @@
 .wrap{padding:4rem 0;background:#F1FBFF;min-height:100vh}
 .wrap2 {padding:2rem 0rem !important;min-height: 100vh !important;}
 .smallwrap{max-width:750px!important;margin: 0 auto;}
-.liveclock{padding: 4rem 2rem 2rem; display: flex; flex-direction: column; text-align: center; align-items: center; border-bottom-right-radius: 20px; border: 6px solid var(--color-main); border-bottom-left-radius: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;}
+.liveclock{padding: 4rem 2rem; display: flex; flex-direction: column; text-align: center; align-items: center; border-bottom-right-radius: 20px; border: 6px solid var(--color-main); border-bottom-left-radius: 10px; border-top-left-radius: 10px; border-top-right-radius: 10px;}
 .liveclock b{font-size:5rem;line-height:20px;color:#1a1a1a}.liveclock span{margin-top:4rem;font-size:25px;text-transform:uppercase}
 
 .jumbotron{background:var(--color-main);padding:2rem;border-top-right-radius:10px;border-top-left-radius:10px;border-bottom-left-radius:10px;border-bottom-right-radius:50px;display: flex; justify-content: space-between;height: 270px;  flex-direction: column;
