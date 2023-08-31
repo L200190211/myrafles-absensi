@@ -42,23 +42,26 @@ class AbsenController extends Controller
 
     public function filter(Request $request) {
 
-        $m = $request->bulan;
-        $y = $request->tahun;
-        $user = User::all();
-        $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
+       
+        if($request->ajax()){
+            $m = $request->bulan;
+            $y = $request->tahun;
+            $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
 
-        $filters = Absen::where('users_id',$request->userID)->whereMonth('created_at', $m)->whereYear('created_at', $y)->get();
-        $events = [];
-        foreach($filters as $absensi ) {
-            $events[]= [
-                "title" => Carbon::parse($absensi->created_at)->format('H:i'),
-                "start"=> Carbon::parse($absensi->created_at)->format('Y-m-d'),                   
-            ]; 
+            $filters = Absen::where('users_id',$request->userID)->whereMonth('created_at', $m)->whereYear('created_at', $y)->get();
+            $events = [];
+            foreach($filters as $absensi ) {
+                $events[]= [
+                    "title" => Carbon::parse($absensi->created_at)->format('H:i'),
+                    "start"=> Carbon::parse($absensi->created_at)->format('Y-m-d'),                   
+                ]; 
+            }
+            return Response::make($events, 200, array('Content-Type'=>'application/json; charset=utf-8'));
         }
+        
 
-    //    $data =  Response::make($events, 200, array('Content-Type'=>'application/json; charset=utf-8'));
-       $data =  response()->json($events);
-        return view('absen.filter',compact('filters','user','month','data'));
+    //    $data = response()->json($events);
+    //     return view('absen.filter',compact('filters','user','month','data'));
 
     }
 
