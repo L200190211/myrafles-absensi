@@ -35,6 +35,9 @@ class LoginController extends Controller
         $allowedIPRange = '127.0.0.1';
         
         // ip addr
+        // setting for hosting ip jaster
+        // if(substr($request->ip(),0,11) == '182.253.90.')
+
         if($allowedIPRange == $request->ip()) {
 
             // user do login
