@@ -104,6 +104,7 @@
         events = JSON.stringify(data);
         $('#calendar').fullCalendar('destroy');
         $('#calendar').fullCalendar({
+            defaultDate: new Date($("#tahun").val(), $("#bulan").val() - 1),
             header: {
                 left: 'prev,next today',
                 center: 'title',
