@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Notifications\CutiCreated;
 use App\Models\Cuti;
 use Carbon\Carbon;
 use Alert;
@@ -39,7 +40,8 @@ class CutiController extends Controller
         $user = User::role('superadmin')->get();
         
         $cuti->save();
-        
+        Notification::send($user, new CutiCreated($cuti));
+
         Alert::success('Request Cuti Sukses Dibuat');
         return redirect()->route('cuti.history');
     }
