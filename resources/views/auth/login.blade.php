@@ -9,13 +9,13 @@
                     <div class="col-xl-12 col-lg-12 mx-lg-0 mx-auto">
                         <div class="formlogin">
                         <img src="{{ asset('assets/img/logo.png') }}"/>
+                        @error('ip') <p class="failog"> {{$message}} </p>@enderror
                         <div class="card">
                             <div class="card-header pb-0 text-start">
                                 <h4 class="font-weight-bolder">Sign In</h4>
                                 <p class="mb-0">Masukkan User dan Password</p>
                             </div>
                             <div class="card-body">
-                             @error('ip') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                 <form role="form" method="POST" action="{{ route('login.perform') }}">
                                     @csrf
                                     @method('post')

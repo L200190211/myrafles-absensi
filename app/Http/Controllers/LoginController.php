@@ -33,7 +33,6 @@ class LoginController extends Controller
         ]);
 
         $allowedIPRange = '127.0.0.1';
-        
         // ip addr
         // setting for hosting ip jaster
         // if(substr($request->ip(),0,11) == '182.253.90.')
@@ -72,7 +71,7 @@ class LoginController extends Controller
             }
 
         } else {
-            return redirect()->back()->withErrors(['ip' => 'You are not allowed to login from this IP.']);
+            return redirect()->back()->withErrors(['ip' => 'Login Gagal, Pastikan kamu terhubung dengan Wi-Fi Kantor']);
         }
        
 
@@ -93,22 +92,5 @@ class LoginController extends Controller
     }
 
 
-    protected function authenticated(Request $request, $user)
-    {
-        // Replace these values with the IP range of your office Wi-Fi network
-        $allowedIPRange = [
-            '182.253.90.1062', // Example IP range
-        ];
-        
-        $userIP = $request->ip();
 
-        foreach ($allowedIPRange as $ipRange) {
-            if (strpos($userIP, $ipRange) === 0) {
-                return redirect()->intended($this->redirectPath());
-            }
-        }
-
-        Auth::logout();
-        return redirect()->back()->withErrors(['ip' => 'You are not allowed to login from this IP.']);
-    }
 }

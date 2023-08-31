@@ -32,7 +32,7 @@ smallwrap
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btx btn-submit mt-1">Ubah</button>
+            <button type="submit" class="btn btn-submit btn-lg">Ubah</button>
         </form>
     </div>
 </div>

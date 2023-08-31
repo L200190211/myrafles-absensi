@@ -20,16 +20,16 @@
             @csrf
             <div class="grid grid3">
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Nama User</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap...">
+                    <label class="form-label">Nama User</label>
+                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap..." required>
                 </div>
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="usrn" placeholder="Untuk Akses Log in...">
+                    <label class="form-label">Username</label>
+                    <input type="text" class="form-control" name="usrn" placeholder="Untuk Akses Log in..." required>
                 </div>
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Level User</label>
-                    <select name="idRole" class="form-control js-example-responsive" autocomplete="off">
+                    <label class="form-label">Level User</label>
+                    <select name="idRole" class="form-control js-example-responsive" autocomplete="off" required>
                         <option selected disabled>--- Pilih Salah Satu ---</option>
                         @if (auth()->user()->hasRole('superadmin'))
                         <option value="1">Superadmin</option>
@@ -40,33 +40,30 @@
                 </div>
             </div>
             <div class="grid grid3">
+                
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Email Aktif</label>
-                    <div class="input-group">
-                        <span class="input-group-text">@</span>
-                        <input type="text/" class="form-control" name="email" placeholder="Email Aktif...">
+                    <label class="form-label">Jabatan</label>
+                    <input type="text" class="form-control" name="jabatan" placeholder="Contoh : Staff Admin..." required>
+                </div>
+                    <div class="formgroup">
+                        <label class="form-label">Email Aktif</label>
+                        <div class="input-group">
+                            <span class="input-group-text">@</span>
+                            <input type="text/" class="form-control" name="email" placeholder="Email Aktif..." required>
+                        </div>
                     </div>
-                </div>
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Kota User</label>
-                    <input type="text" class="form-control" name="kota" placeholder="Asal User...">
-                </div>
-                <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">No Whatsapp</label>
+                    <label class="form-label">No Whatsapp</label>
                     <div class="input-group">
                         <span class="input-group-text">+62</span>
-                        <input type="text" class="form-control" name="noWa" placeholder="Ketik tanpa +62 / 0...">
+                        <input type="text" class="form-control" name="noWa" placeholder="Ketik tanpa +62 / 0..." required>
                     </div>
                 </div>
             </div>
             <div class="grid grid2">
                 <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Alamat</label>
-                    <textarea class="form-control" id="address" name="address" placeholder="Masukkan Alamat Anda"></textarea>
-                </div>
-                <div class="formgroup">
-                    <label for="exampleInputEmail1" class="form-label">About</label>
-                    <textarea class="form-control" id="about" name="about" placeholder="Masukkan Rincian Anda"></textarea>
+                    <label class="form-label">Alamat</label>
+                    <textarea class="form-control" id="address" name="address" placeholder="Masukkan Alamat Anda" required></textarea>
                 </div>
             </div>
 

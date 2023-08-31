@@ -21,15 +21,15 @@
             <div class="grid grid3">
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label">Nama User</label>
-                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap..." value="{{ $data->firstname }}">
+                    <input type="text" class="form-control" name="nama" placeholder="Nama Lengkap..." value="{{ $data->firstname }}" required>
                 </div>
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label">Username</label>
-                    <input type="text" class="form-control" name="usrn" placeholder="Untuk Akses Log in..." value="{{ $data->username }}">
+                    <input type="text" class="form-control" name="usrn" placeholder="Untuk Akses Log in..." value="{{ $data->username }}" required>
                 </div>
                 <div class=" formgroup">
                     <label for="exampleFormControlInput1" class="form-label">Level User</label>
-                    <select name="idRole" class="form-control js-example-responsive" autocomplete="off">
+                    <select name="idRole" class="form-control js-example-responsive" autocomplete="off" required>
                         <option selected disabled>--- Pilih Salah Satu ---</option>
                         @foreach ($roles as $role)
                         <option value="{{ $role->id }}" {{ $role->id == $data->roles->pluck('id')[0] ? 'selected' : '' }}>
@@ -47,21 +47,21 @@
             </div>
             <div class="grid grid3">
                 <div class="formgroup">
+                    <label for="exampleFormControlInput1" class="form-label">Jabatan</label>
+                    <input type="text" class="form-control" name="jabatan" placeholder="Asal User..." value="{{ $data->jabatan }}" required>
+                </div>
+                <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label">Email Aktif</label>
                     <div class="input-group">
                         <span class="input-group-text">@</span>
-                        <input type="text/" class="form-control" name="email" placeholder="Email Aktif..." value="{{ $data->email }}">
+                        <input type="text/" class="form-control" name="email" placeholder="Email Aktif..." value="{{ $data->email }}" required>
                     </div>
-                </div>
-                <div class="formgroup">
-                    <label for="exampleFormControlInput1" class="form-label">Kota User</label>
-                    <input type="text" class="form-control" name="kota" placeholder="Asal User..." value="{{ $data->city }}">
                 </div>
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label">No Whatsapp</label>
                     <div class="input-group">
                         <span class="input-group-text">+62</span>
-                        <input type="text" class="form-control" name="noWa" placeholder="Ketik tanpa +62 / 0..." value="{{ $data->noWa }}">
+                        <input type="text" class="form-control" name="noWa" placeholder="Ketik tanpa +62 / 0..." value="{{ $data->noWa }}" required>
                     </div>
                 </div>
             </div>
@@ -70,17 +70,13 @@
                     <label for="exampleFormControlInput1" class="form-label">Alamat</label>
                     <textarea class="form-control" id="address" name="address" placeholder="Masukkan Alamat Anda">{{ $data->alamat }}</textarea>
                 </div>
-                <div class="formgroup">
-                    <label for="exampleInputEmail1" class="form-label">About</label>
-                    <textarea class="form-control" id="about" name="about" placeholder="Masukkan Rincian Anda">{{ $data->about }}</textarea>
-                </div>
+                
             </div>
 
             <div class="col-md-12 flex-center m-t-40">
                 <button type="submit" class="btn btn-submit btn-lg">Ubah Data</button>
 
-                <span class="helptext m-l-20 inline"><b class="red">Note :</b>
-                    User bisa melakukan reset password untuk mengganti password baru, Pass Otomatis Terisi : jacoidn</span>
+               
             </div>
         </form>
     </div>

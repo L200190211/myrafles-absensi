@@ -36,9 +36,8 @@ class UserController extends Controller
             'password' => '$2y$10$gOwNzY8Xcd0FrO4GbFS4Me9r2AuOe4iiCBmwYrg8UakmDNvG0o0He',
             'noWa' => $request->noWa,
             'lastLogin' => now(),
-            'city' => $request->kota,
+            'jabatan' => $request->jabatan,
             'alamat' => $request->address,
-            'about' => $request->about,
         ]);
 
         $user->assignRole($request->idRole);
@@ -59,9 +58,8 @@ class UserController extends Controller
             'username' => $request->usrn,
             'email' => $request->email,
             'noWa' => $request->noWa,
-            'city' => $request->kota,
+            'jabatan' => $request->jabatan,
             'alamat' => $request->address,
-            'about' => $request->about,
         ]);
 
         $user->syncRoles($request->idRole);
@@ -85,7 +83,7 @@ class UserController extends Controller
 
         User::find(auth()->user()->id)->update(['password' => bcrypt($request->new_password)]);
         Alert::success('Berhasil', 'Password telah berubah');
-        return redirect()->route('user.list');
+        return redirect()->route('home');
     }
 
     public function delete($id)

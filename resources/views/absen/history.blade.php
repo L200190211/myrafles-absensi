@@ -18,7 +18,7 @@
 @role('superadmin')
 <div class="filter">
 <form method="GET" class="filter_form">
-            <div class="formgroup_filter m-0">
+            <div class="formgroup_filter">
                 <label for="exampleFormControlInput1" class="form-label m-0">User</label>
                 <select class="form-control" name="userID" id="userID">
                 @foreach ($user as $users)
@@ -26,7 +26,7 @@
                 @endforeach
                 </select>
             </div>
-        <div class="formgroup_filter m-0">
+        <div class="formgroup_filter">
                 <label for="exampleFormControlInput1" class="form-label m-0">Bulan</label>
                 <select class="form-control" name="bulan" id="bulan">
                 @foreach ($month as $key => $mont)
@@ -34,16 +34,16 @@
                 @endforeach
                 </select>
             </div>
-            <div class="formgroup_filter m-0">
+            <div class="formgroup_filter">
                 <label for="exampleFormControlInput1" class="form-label m-0">Tahun</label>
                 <select class="form-control" name="tahun" id="tahun">
                     <option value="2020">2020</option>
                     <option value="2021">2021</option>
                     <option value="2022">2022</option>
-                    <option value="2023">2023</option>
+                    <option value="2023" selected>2023</option>
                 </select>
             </div>
-        <button type="submit" class="btn-submit btn-lg" id="submit">Submit</button>
+        <button type="submit" class="btn btn-white btn-lg" id="submit">Submit</button>
    </form>
 </div>
 @endrole

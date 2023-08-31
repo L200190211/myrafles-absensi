@@ -21,7 +21,6 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('noWa')->nullable();
-            $table->string('city')->nullable();
             $table->string('alamat')->nullable();
             $table->string('jabatan')->nullable();
             $table->timestamp('lastLogin')->nullable();

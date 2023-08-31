@@ -13,23 +13,27 @@
                 $showNotif = auth()->user()->unreadNotifications()->latest()->paginate(5);
                 @endphp
                 
-                <span><a href="{{route('home.notif')}}" class="btx btn-warning"><i class="fa fa-bell-o" aria-hidden="true"></i>
+              <a href="{{route('home.notif')}}" class="btx-bell"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="1.25" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M10 5a2 2 0 1 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
+                    <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+                 </svg>
 
                 @if (count($showNotif ?? ''> 0))
                     
                 <span class="badge badge-danger">{{count($showNotif)}}</span>
                 @endif
                 
-                </a></span>
+                </a>
             </div>
             @if ($absen->created_at ?? null != null)
-            @if ($absen->created_at->format('H:i') < '10:00' ) <p class="text-white">Good Joob ! </p>
+            @if ($absen->created_at->format('H:i') < '10:00' ) <p class="text-white">Terima kasih telah datang tepat waktu 🥳</p>
                 @else
-                <p class="text-white">AGAK TELAT YA ! </p>
+                <p class="text-white">Kamu Telat Hari ini. Besok usahakan tepat waktu yaa 😉</p>
                 @endif
 
                 @else
-                <p class="text-white">Belum Check in Ya ?</p>
+                <p class="text-white">Sudahkah kamu check-in Hari ini ? ✌️</p>
                 @endif
 
                 @if ($absen->created_at ?? null != null)
@@ -47,8 +51,8 @@
     </div>
     <div class="col-lg-5">
         <div class="liveclock">
-            <div id="time"></div>
-            <span style="margin:17px 0;">{{ Carbon\Carbon::parse(now())->locale('id')->translatedFormat('l') }} , {{now()->format('j F Y');}}</span>
+            <div id="time"><b>16:36:11</b></div>
+            <span>{{ Carbon\Carbon::parse(now())->locale('id')->translatedFormat('l') }} , {{now()->format('j F Y');}}</span>
         </div>
     </div>
 </div>

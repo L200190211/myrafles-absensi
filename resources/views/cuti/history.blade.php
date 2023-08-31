@@ -1,5 +1,5 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-@section('title', 'History Cuti')
+@section('title', 'Cuti')
 
 
 @section('mxwidth')
@@ -7,10 +7,17 @@
 @endsection
 
 @section('titlepage')
+@role(['superadmin','admin'])
+<h2>Kelola Cuti</h2>
+@endrole
+@role('staff')
 <h2>History Cuti</h2>
+@endrole
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
+    @role('staff')
     <a href="{{ route('cuti.create') }}" class="btx btn-secondary btn-id">+ Buat Cuti</a>
+    @endrole
 </div>
 @endsection
 
