@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cuti;
 use Carbon\Carbon;
 use Alert;
+use App\Models\User;
 
 class CutiController extends Controller
 {
@@ -35,8 +36,10 @@ class CutiController extends Controller
 
         $cuti->tglCuti = Carbon::create($year, $month, $day, $hour, $minute, $tz);
 
+        $user = User::role('superadmin')->get();
+        
         $cuti->save();
-
+        
         Alert::success('Request Cuti Sukses Dibuat');
         return redirect()->route('cuti.history');
     }
