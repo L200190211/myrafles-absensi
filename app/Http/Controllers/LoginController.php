@@ -30,6 +30,7 @@ class LoginController extends Controller
         $credentials = $request->validate([
             'username' => ['required'],
             'password' => ['required'],
+            'role_id'  => [ '1', '2' ]
         ]);
 
         $allowedIPRange = '127.0.0.1';

@@ -25,7 +25,7 @@ class AbsenController extends Controller
     public function absensi() {
  
         $start = Carbon::now()->startOfMonth();
-        $end = Carbon::now();
+        $end = Carbon::now()->endOfMonth();
 
         $query = Absen::where('users_id',auth()->user()->id)->whereBetween('tgl_absen', [$start, $end])->get();
         $events = [];

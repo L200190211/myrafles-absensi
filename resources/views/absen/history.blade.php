@@ -67,6 +67,7 @@
 
 @push('js')
 <script>
+
     var event = '';
     $.ajax({
       url: '/absen/absensi',
@@ -74,7 +75,6 @@
       type: 'GET',
       success: function(data) {
         events= JSON.stringify(data);
-        console.log(events)
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -88,6 +88,7 @@
             droppable: false,
             events: JSON.parse(events)
         });
+        console.log(events)
       }
     });
 
