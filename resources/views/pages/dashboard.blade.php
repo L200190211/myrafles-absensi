@@ -27,9 +27,18 @@
                 </a>
             </div>
             @if ($absen->created_at ?? null != null)
-            @if ($absen->created_at->format('H:i') < '10:00' ) <p class="text-white">Terima kasih telah datang tepat waktu 🥳</p>
+            @if ($absen->created_at->format('H:i') < '08:00' ) <p class="text-white">Terima kasih telah datang tepat waktu 🥳</p>
                 @else
-                <p class="text-white">Kamu Telat Hari ini. Besok usahakan tepat waktu yaa 😉</p>
+                <p class="text-white">Kamu Telat 
+                @if ($absen->created_at->format('H:i') > '15:00' )
+                    @php
+                        $start_time = $absen->created_at->format('H:i');
+                        $end_time = new Carbon\Carbon('15:00');
+                        $time_difference_in_minutes = $end_time->diffInMinutes($start_time);
+                    @endphp     
+                    {{ $time_difference_in_minutes }} menit
+                @endif 
+                Hari ini. Besok usahakan tepat waktu yaa 😉</p>
                 @endif
 
                 @else
