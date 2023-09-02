@@ -36,10 +36,7 @@ smallwrap
 
 @section('content')
 
-
-<div class="row">
-
-  <div class="card">
+<div class="card">
     <div class="card-body">
            @php
                 $showNotif = auth()->user()->unreadNotifications()->latest()->paginate(5);
@@ -61,8 +58,6 @@ smallwrap
     <button id="mark-all" class="btn btn-primary mt-3"> Mark all as read</button>
     @endif
     </div>
-</div>
-
 </div>
 @endsection
 
