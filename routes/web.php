@@ -53,6 +53,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/add', [CutiController::class, 'create'])->name('create');
 		Route::post('/add', [CutiController::class, 'store'])->name('store');
 		Route::get('/history', [CutiController::class, 'history'])->name('history');
+		Route::get('/kelola', [CutiController::class, 'kelola'])->name('kelola');
 		Route::get('/decline/{id}', [CutiController::class, 'decline'])->name('decline');
 		Route::get('/accept/{id}', [CutiController::class, 'accept'])->name('accept');
 	});

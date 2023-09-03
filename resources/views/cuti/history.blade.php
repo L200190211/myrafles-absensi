@@ -34,12 +34,15 @@
     <table class="table table-hover table-striped table-responsive">
         <thead>
             <tr>
-                <th scope="col" style="width:5%;">No</th>
-                <th scope="col">Tanggal Cuti</th>
-                <th scope="col">Alasan</th>
-                <th scope="col">Status</th>
-                <th scope="col">Durasi</th>
-                <th scope="col" style="width:5%;">Action</th>
+                <th style="width:5%;">No</th>
+                <th>Tanggal Cuti</th>
+                @role(['superadmin','admin'])
+                <th>Nama Staff</th>
+                @endrole
+                <th>Alasan</th>
+                <th>Status</th>
+                <th>Durasi</th>
+                <th style="width:5%;">Action</th>
             </tr>
         </thead>
         <tbody>
@@ -51,6 +54,9 @@
                 <td scope="row">{{ $i++ }}</td>
                 <td>
                     {{ Carbon\Carbon::parse($cuti->tglCuti)->locale('id')->translatedFormat('d F Y') }}
+                </td>
+                <td>
+                    {{ $cuti->firstname }}
                 </td>
                 <td>
                     {{ $cuti->perihal }}
@@ -87,11 +93,13 @@
                                 <div class="modal-body left-text">
                                     <p>{{ $cuti->rincian }}</p>
                                 </div>
+                                <div class="modal-footer">Diajukan Pada : {{ Carbon\Carbon::parse($cuti->when)->locale('id')->translatedFormat('d F Y - H:i') }} WIB</p>
+                                </div>
                                 @role(['superadmin','admin'])
                                 @if ($cuti->status == 0)
                                 <div class="modal-footer mb-3">
-                                    <a href="{{ route('cuti.decline', $cuti->id) }}" type="button" class="btn btn-third w25">Decline </a>
-                                    <a href="{{ route('cuti.accept', $cuti->id) }}" type="button" class="btn btn-main w70">Accept </a>
+                                    <a href="{{ route('cuti.decline', $cuti->id) }}" type="button" class="btn btn-third w25">Tolak</a>
+                                    <a href="{{ route('cuti.accept', $cuti->id) }}" type="button" class="btn btn-main w70">ACC CUTI</a>
                                 </div>
                                 @else
                                 @endif
@@ -151,15 +159,6 @@
                                 <div class="modal-body left-text">
                                     <p>{{ $cuti->rincian }}</p>
                                 </div>
-                                @role(['superadmin','admin'])
-                                @if ($cuti->status == 0)
-                                <div class="modal-footer mb-3">
-                                    <a href="{{ route('cuti.decline', $cuti->id) }}" type="button" class="btn btn-third w25">Decline </a>
-                                    <a href="{{ route('cuti.accept', $cuti->id) }}" type="button" class="btn btn-main w70">Accept </a>
-                                </div>
-                                @else
-                                @endif
-                                @endrole
                             </div>
                         </div>
                     </div>

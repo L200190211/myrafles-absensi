@@ -26,6 +26,7 @@ class User extends Authenticatable
         'noWa',
         'jabatan',
         'lastLogin',
+        'idRole',
         'alamat'
     ];
 

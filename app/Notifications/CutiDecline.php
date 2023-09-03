@@ -51,7 +51,7 @@ class CutiDecline extends Notification
             'tgl_cuti' => $this->data->created_at,
             'notifType' => 'cutiDecline',
             'pegawai' => $this->data->who,
-            'text' => 'Cuti telah ditolak',
+            'text' => 'Cuti Kamu ditolak',
         ];
     }
 }

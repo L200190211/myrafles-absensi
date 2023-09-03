@@ -19,7 +19,7 @@
 <div class="filter">
 <form method="GET" class="filter_form">
             <div class="formgroup_filter">
-                <label for="exampleFormControlInput1" class="form-label m-0">User</label>
+                <label for="exampleFormControlInput1" class="form-label m-0">Nama Staff</label>
                 <select class="form-control" name="userID" id="userID">
                 @foreach ($user as $users)
                     <option value="{{$users->id}}">{{$users->firstname}}</option>
@@ -55,14 +55,11 @@
     </div>
 </div>
 
-<div class="card">
-                    <div class="card-body">
-                        <div class="container-calendar">
-                         <div id='calendar'></div>
-                         <div id='calendarfilter'></div>
-                        </div>
-                  </div>
-</div>
+
+<div class="container-calendar">
+    <div id='calendar'></div>
+    <div id='calendarfilter'></div>
+   </div>
 @endsection
 
 @push('js')
@@ -78,8 +75,8 @@
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
-                center: 'title',
-                right: ''
+                center: '',
+                right: 'title'
             },
             locale:'id',
             editable: false,
@@ -109,7 +106,7 @@
             header: {
                 left: 'prev,next today',
                 center: 'title',
-                right: 'month,basicWeek,basicDay'
+                right: ''
             },
             locale:'id',
             editable: false,

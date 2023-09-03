@@ -21,12 +21,12 @@ smallwrap
             <div class="grid grid2">
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label mb-3">Tanggal Cuti</label>
-                    <input type="date" class="form-control" id="tglCuti" name="tglCuti" placeholder="Masukkan Tgl Cuti">
+                    <input type="date" class="form-control" id="tglCuti" name="tglCuti" placeholder="Masukkan Tgl Cuti" required>
                 </div>
                 <div class="formgroup">
                     <label for="exampleFormControlInput1" class="form-label mb-3">Berapa Hari Kerja ?</label>
                     <div class="input-group">
-                        <input type="text/" class="form-control" id="total" name="total" placeholder="Masukkan Total Hari">
+                        <input type="text/" class="form-control" id="total" name="total" placeholder="Masukkan Total Hari" required>
                         <span class="input-group-text" style="border-right: 1px solid #d2d6da !important">Hari</span>
                     </div>
                 </div>
@@ -34,7 +34,7 @@ smallwrap
             <div class="grid">
                 <div class="formgroup w60">
                     <label for="exampleFormControlInput1" class="form-label mb-3">Perihal Cuti</label>
-                    <select name="perihal" class="form-control select2" autocomplete="off" id="perihal">
+                    <select name="perihal" class="form-control select2" autocomplete="off" id="perihal" required>
                         <option selected="" disabled="">--- Pilih Salah Satu ---</option>
                         @foreach ($perihal as $perihals)
                         <option value="{{$perihals}}" selected="">{{$perihals}}</option>
@@ -45,12 +45,13 @@ smallwrap
             <div class="grid">
             <div class="formgroup">
                 <label for="exampleFormControlInput1" class="form-label mb-3">Rincian Cuti</label>
-                <textarea class="form-control" id="rincian" name="rincian" placeholder="Masukkan Rincian Cuti"></textarea>
+                <textarea class="form-control" id="rincian" name="rincian" placeholder="Masukkan Rincian Cuti" required></textarea>
             </div>
         </div>
             <input type="hidden" name="who" value="{{auth()->user()->id}}" />
             <div class="grid">
             <button type="submit" class="btn btn-submit btn-lg">Ajukan Cuti</button>
+            <span class="text-center">Sisa Cuti Kamu : {{auth()->user()->tokenCuti}}</span>
         </div>
         </form>
     </div>

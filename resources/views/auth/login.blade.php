@@ -29,7 +29,7 @@
                                     </div>
                                     <div class="withcheckin">
                                         <input type="checkbox" id="time" name="check">
-                                        <label> Check in </label>
+                                        <label> Check in <span>Centang jika sudah melewati Jam 08.30</span></label>
                                     </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>

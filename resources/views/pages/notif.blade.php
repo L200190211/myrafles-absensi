@@ -55,7 +55,7 @@ smallwrap
       <div class="">No notifications</div>
       @endforelse
     @if (count($showNotif) > 0)
-    <button id="mark-all" class="btn btn-primary mt-3"> Mark all as read</button>
+    <button id="mark-all" class="btn btn-primary mt-3">Bersihkan Notifikasi</button>
     @endif
     </div>
 </div>

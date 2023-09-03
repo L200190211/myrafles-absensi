@@ -24,33 +24,36 @@ class CutiController extends Controller
 
     public function store(Request $request)
     {
-        $cuti = new Cuti();
-        $cuti->who = $request->who;
-        $cuti->perihal = $request->perihal;
-        $cuti->total = $request->total;
-        $cuti->tglCuti = $request->tglCuti;
-        $cuti->rincian = $request->rincian;
-
-        $year = Carbon::parse($cuti->tglCuti)->format('Y');
-        $month = Carbon::parse($cuti->tglCuti)->format('m');
-        $day = Carbon::parse($cuti->tglCuti)->format('d');
-        $hour = now()->format('H');
-        $minute = now()->format('i');
-        $tz = 'Asia/Jakarta';
-
-        $cuti->tglCuti = Carbon::create($year, $month, $day, $hour, $minute, $tz);
-
-        $user = User::role('superadmin')->get();
-
+        
          // calculate tokencuti
          $token = auth()->user()->tokenCuti;
 
-         if($token == 0) {
-             Alert::warning('Token Cutimu Telah Habis');
-             return redirect()->back();
+         if($token >= 1) {
+
+            $cuti = new Cuti();
+            $cuti->who = $request->who;
+            $cuti->perihal = $request->perihal;
+            $cuti->total = $request->total;
+            $cuti->tglCuti = $request->tglCuti;
+            $cuti->rincian = $request->rincian;
+
+            $year = Carbon::parse($cuti->tglCuti)->format('Y');
+            $month = Carbon::parse($cuti->tglCuti)->format('m');
+            $day = Carbon::parse($cuti->tglCuti)->format('d');
+            $hour = now()->format('H');
+            $minute = now()->format('i');
+            $tz = 'Asia/Jakarta';
+
+            $cuti->tglCuti = Carbon::create($year, $month, $day, $hour, $minute, $tz);
+
+            $user = User::role('superadmin')->get();
+
+
          } else {
-             $calculated = intval($token) - intval($request->total);
-             User::where('id',auth()->user()->id)->update(['tokenCuti' => $calculated]);
+            
+            Alert::warning('Token Cutimu Telah Habis');
+            return redirect()->back();
+
          }
         
         $cuti->save();
@@ -68,8 +71,21 @@ class CutiController extends Controller
     public function history()
     {
         $data = Cuti::where('who',auth()->user()->id)->paginate(25);
-        $dataSuperadmin = Cuti::latest()->paginate(25);
+       
+
+
+        $dataSuperadmin = Cuti::join('users', 'users.id', '=', 'cutis.who')
+        ->select('cutis.*', 'cutis.created_at AS when', 'users.firstname')
+        ->orderByDesc('cutis.created_at')->paginate(25);
+
         return view('cuti.history', compact('data','dataSuperadmin'));
+    }
+    // Riwayat Cuti
+    public function kelola()
+    {
+        $data = Cuti::where('who',auth()->user()->id)->paginate(25);
+        $dataSuperadmin = Cuti::latest()->paginate(25);
+        return view('cuti.kelola', compact('data','dataSuperadmin'));
     }
 
 
@@ -90,18 +106,25 @@ class CutiController extends Controller
     }
 
     // Setujui Cuti
-    public function accept($id)
+    public function accept(Request $request)
     {
-        $data = Cuti::find($id);
+        $data = Cuti::find($request->id);
         if ($data->status == "0") {
             $data->status = "1";
         };
         $data->save();
 
-        $user = User::where('id',$data->who)->first();
+        // $who = User::where('id',$request->who)->get();
+        
+        // $token = $who->tokenCuti;
+
+        // $calculated = intval($token) - intval($request->total);
+        // User::where('id',$data->who)->update(['tokenCuti' => $calculated]);
+
+        $user = User::where('id',$request->who)->first();
         Notification::send($user, new CutiAcc($data));
 
-        Alert::success('Request Cuti Diterima');
+        Alert::success('Berhasil Acc Cuti');
         return redirect()->route('cuti.history');
     }
 }

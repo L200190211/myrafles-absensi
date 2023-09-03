@@ -8,6 +8,7 @@ use Carbon\Carbon;
 
 use App\Models\Absen;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use Alert;
 use Illuminate\Support\Facades\Response;
 
@@ -17,7 +18,7 @@ class AbsenController extends Controller
     public function history() {
         
         $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
-        $user = User::all();
+        $user = User::role('staff')->get();
         return view('absen.history',compact('month','user'));
 
     }
