@@ -18,7 +18,7 @@ class AbsenController extends Controller
     public function history() {
         
         $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
-        $user = User::role('staff')->get();
+        $user = User::role('staff')->where('status',1)->get();
         return view('absen.history',compact('month','user'));
 
     }
@@ -68,10 +68,21 @@ class AbsenController extends Controller
 
 
     public function checkin(Request $request) {
+ 
+ 
+        $ipnya = '182.253.90.';
 
-        Absen::create(['users_id' => auth()->user()->id , 'tgl_absen' => $request->waktu , 'ip_address' => $request->ip()]);
-        Alert::success('Check in berhasil');
-        return redirect()->back();
+        // $ipnya = '111.94.147.' RFLS
+        // $ipnya = '182.253.90.' JSTR
+        // $ipnya = '127.0.0.' LOCAL
+        
+        if (substr($request->ip(),0,11) == $ipnya){
+            Absen::create(['users_id' => auth()->user()->id , 'tgl_absen' => $request->waktu , 'ip_address' => $request->ip()]);
+            Alert::success('Check in berhasil');
+            return redirect()->back();
+        }else{
+            return redirect()->back()->withErrors(['ip' => 'Absen Gagal, Pastikan kamu terhubung dengan Wi-Fi Kantor']);
+        }
         
     }
 

@@ -34,10 +34,14 @@ class LoginController extends Controller
             'password' => ['required'],
         ]);
 
-        $allowedIPRange = '127.0.0.1';
-        // ip addr
-        // setting for hosting ip jaster
-        // if(substr($request->ip(),0,11) == '182.253.90.')
+
+        $jamawal = '07.30';
+        $jamakhir = '08.30';
+        $ipnya = '127.0.0.';
+
+        // $ipnya = '111.94.147.' RFLS
+        // $ipnya = '182.253.90.' JSTR
+        // $ipnya = '127.0.0.' LOCAL
 
       // user do login
       if (Auth::attempt($credentials)) {
@@ -52,8 +56,8 @@ class LoginController extends Controller
             
         } else {
 
-            if(now()->format('H:i') >= '10:30' && now()->format('H:i') < '11:30' ) {
-            // if(now()->format('H:i') >= '07:30' && now()->format('H:i') < '08:30' ) {
+            if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,11) == $ipnya) {
+
                 
                 $log = Absen::where('users_id' ,Auth::user()->id)
                 ->whereRaw('DATE_FORMAT(created_at, "%d %m %Y") = ?', [now()->format('d m Y')])
@@ -69,12 +73,11 @@ class LoginController extends Controller
                 }else{
                     Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
                 }
-            }else{
-                if($request->check != null ) {
-                    Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
-                }else{
 
-                }
+            }else if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,11) !== $ipnya){
+                Auth::logout();
+                return redirect()->back()->withErrors(['ip' => 'Login Gagal, Pastikan kamu terhubung dengan Wi-Fi Kantor']);
+            }else{
 
             }
             

@@ -27,6 +27,10 @@
                                         <input type="password" name="password" class="form-control form-control-lg" aria-label="Password" placeholder="Password...">
                                         @error('password') <p class="text-danger text-xs pt-1"> {{$message}} </p>@enderror
                                     </div>
+                                    <div class="withcheckin">
+                                        <input type="checkbox" id="time" name="check">
+                                        <label> Check in <span>Centang jika sudah melewati Jam 08.30</span></label>
+                                    </div>
                                     <div class="text-center">
                                         <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
                                     </div>

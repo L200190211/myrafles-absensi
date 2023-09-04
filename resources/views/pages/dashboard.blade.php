@@ -6,6 +6,7 @@
 
 <div class="row">
     <div class="col-lg-7">
+        @error('ip') <p class="failog"> {{$message}} </p>@enderror
         <div class="jumbotron">
             <div class="item_jum">
                 <div class="welcome">
@@ -34,13 +35,13 @@
                 </a>
             </div>
             @if ($absen->created_at ?? null != null)
-            @if ($absen->created_at->format('H:i') <= '11:00' ) <div class="notcheck">Terima kasih telah datang tepat waktu 🥳</div>
+            @if ($absen->created_at->format('H:i') <= '08:00' ) <div class="notcheck">Terima kasih telah datang tepat waktu 🥳</div>
                 @else
                 <div class="notcheck">Kamu Telat 
-                @if ($absen->created_at->format('H:i') > '11:00' )
+                @if ($absen->created_at->format('H:i') > '08:00' )
                     @php
                         $start_time = $absen->created_at->format('H:i');
-                        $end_time = new Carbon\Carbon('11:00');
+                        $end_time = new Carbon\Carbon('08:00');
                         $time_difference_in_minutes = $end_time->diffInMinutes($start_time);
                     @endphp     
                     {{ $time_difference_in_minutes }} menit
