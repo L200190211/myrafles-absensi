@@ -49,7 +49,8 @@ class AbsenController extends Controller
             $y = $request->tahun;
             $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
 
-            $filters = Absen::where('users_id',$request->userID)->whereMonth('created_at', $m)->whereYear('created_at', $y)->get();
+            $filters = Absen::where('users_id',$request->userID)->whereYear('created_at', '=', $y)->whereMonth('created_at', '=', $m)->get();
+
             $events = [];
             foreach($filters as $absensi ) {
                 $events[]= [

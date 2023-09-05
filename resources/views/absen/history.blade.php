@@ -29,9 +29,18 @@
         <div class="formgroup_filter">
                 <label for="exampleFormControlInput1" class="form-label m-0">Bulan</label>
                 <select class="form-control" name="bulan" id="bulan">
-                @foreach ($month as $key => $mont)
-                    <option value="{{$key+1}}">{{$mont}}</option>
-                @endforeach
+                    <option value="01">Januari</option>
+                    <option value="02">Februari</option>
+                    <option value="03">Maret</option>
+                    <option value="04">April</option>
+                    <option value="05">Mei</option>
+                    <option value="06">Juni</option>
+                    <option value="07">Juli</option>
+                    <option value="08">Agustus</option>
+                    <option value="09">September</option>
+                    <option value="10">Oktober</option>
+                    <option value="11">November</option>
+                    <option value="12">Desember</option>
                 </select>
             </div>
             <div class="formgroup_filter">
@@ -72,6 +81,7 @@
       type: 'GET',
       success: function(data) {
         events= JSON.stringify(data);
+        console.log(data);
         $('#calendar').fullCalendar({
             header: {
                 left: 'prev,next today',
@@ -83,9 +93,15 @@
             displayEventTime: true,
             selectable: false,
             droppable: false,
-            events: JSON.parse(events)
+            events: JSON.parse(events),
+            eventRender: function(event, eventElement) {
+                if (event.title > "08:00") {
+                eventElement.css('background-color', '#DA3540');
+                } else {
+                eventElement.css('background-color', '#0077a2');
+                }
+            },
         });
-        console.log(events)
       }
     });
 
@@ -113,7 +129,14 @@
             displayEventTime: true,
             selectable: false,
             droppable: false,
-            events: JSON.parse(events)
+            events: JSON.parse(events),
+            eventRender: function(event, eventElement) {
+                if (event.title > "08:00") {
+                eventElement.css('background-color', '#DA3540');
+                } else {
+                eventElement.css('background-color', '#0077a2');
+                }
+            },
         });
 
         Swal.fire({
