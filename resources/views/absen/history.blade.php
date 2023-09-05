@@ -59,7 +59,7 @@
 <div class="row" style="display: none;">
     <div class="col-lg-12">
         <div class="jumbotron">
-            <h3>History Absen</h3>
+            <h3>Riwayat Absen</h3>
         </div>
     </div>
 </div>
