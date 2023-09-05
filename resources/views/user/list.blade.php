@@ -1,12 +1,12 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-@section('title', 'List User')
+@section('title', 'Daftar User')
 
 @section('mxwidth')
 
 @endsection
 
 @section('titlepage')
-<h2>List User</h2>
+<h2>Daftar User</h2>
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
     <a href="{{ route('user.create') }}" class="btx btn-secondary btn-id">+ User Baru</a>
@@ -17,7 +17,7 @@
 <div class="row" style="display: none;">
     <div class="col-lg-12">
         <div class="jumbotron">
-            <h3>List User</h3>
+            <h3>Daftar User</h3>
         </div>
     </div>
 </div>

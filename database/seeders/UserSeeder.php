@@ -15,9 +15,10 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         $ceo = User::create([
+
             'id' => 3,
             'firstname' => 'Reinhard',
             'email' => 'reinhard@rafles.id',
@@ -30,22 +31,35 @@ class UserSeeder extends Seeder
         ]);
         $ceo->assignRole('superadmin');
 
+        $staff1 = User::create([
+            'id' => 4,
+            'firstname' => 'Staff1',
+            'email' => 'sherlygmail.com',
+            'username' => 'staff1',
+            'noWa' => '888999333',
+            'jabatan' => 'Staff IT',
+            'alamat' => 'Jl Surabaya',
+            'lastLogin' => now(),
+            'password' => bcrypt('1234')
+        ]);
+        $staff1->assignRole('staff');
+
         $jaster = User::create([
-                'id' => 2,
-                'firstname' => 'JasterTeam',
-                'email' => 'web@jaster.co.id',
-                'username' => 'jaster',
-                'noWa' => '888999333',
-                'jabatan' => 'Arsitek',
-                'alamat' => 'Jl Surabaya',
-                'lastLogin' => now(),
-                'password' => bcrypt('1234')
+            'id' => 2,
+            'firstname' => 'JasterTeam',
+            'email' => 'web@jaster.co.id',
+            'username' => 'jaster',
+            'noWa' => '888999333',
+            'jabatan' => 'Arsitek',
+            'alamat' => 'Jl Surabaya',
+            'lastLogin' => now(),
+            'password' => bcrypt('1234')
         ]);
         $jaster->assignRole('superadmin');
 
-        
+
         $admrafles = User::create([
-            'id' =>1,
+            'id' => 1,
             'firstname' => 'Admin Rafles',
             'email' => 'admin@rafles.id',
             'username' => 'admrafles',
@@ -57,7 +71,5 @@ class UserSeeder extends Seeder
         ]);
 
         $admrafles->assignRole('superadmin');
-
-        
-      }
+    }
 }

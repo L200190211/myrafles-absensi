@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absen;
 use App\Models\User;
 use Carbon\Carbon;
+use Alert;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +38,7 @@ class LoginController extends Controller
 
         $jamawal = '07.30';
         $jamakhir = '08.30';
-        $ipnya = '127.0.0.';
+        $ipnya = '127.0.0.1';
 
         // $ipnya = '111.94.147.' RFLS
         // $ipnya = '182.253.90.' JSTR
@@ -72,6 +73,7 @@ class LoginController extends Controller
                     // First absen
                 }else{
                     Absen::create(['users_id' => Auth::user()->id , 'tgl_absen' => now() , 'ip_address' => $request->ip()]);
+                    Alert::success('Check in berhasil');
                 }
 
             }else if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,11) !== $ipnya){

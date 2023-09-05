@@ -10,7 +10,7 @@
         <div class="jumbotron">
             <div class="item_jum">
                 <div class="welcome">
-                    <h3>Welcome Back, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
+                    <h3>Selamat Datang, {{ implode(' ', array_slice(explode(' ', auth()->user()->firstname), 0, 1)) }} 👋</h3>
                     <span class="subtitle"><svg width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                         <path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
@@ -46,12 +46,12 @@
                     @endphp     
                     {{ $time_difference_in_minutes }} menit
                 @endif 
-                Hari ini. Besok usahakan tepat waktu yaa 😉</div>
+                hari ini. Besok usahakan tepat waktu yaa 😉</div>
                 @endif
 
                 @else
                 <div class="notcheck">
-                    <span>Sudahkah kamu check-in Hari ini ? ✌️</span>
+                    <span>Sudahkah kamu check-in hari ini ? ✌️</span>
                 <form action="{{route('absen.checkin')}}" method="POST">
                     @csrf
                     <input type="hidden" name="waktu" id="waktu">
@@ -79,20 +79,20 @@
 
 <ul class="navigate">
     @role(['superadmin','admin'])
-    <li><a href="{{route('absen.history')}}"><img src="{{ asset('assets/img/history.png') }}" /> History Absensi</a></li>
+    <li><a href="{{route('absen.history')}}"><img src="{{ asset('assets/img/history.png') }}" /> Riwayat Absensi</a></li>
     <li><a href="{{route('cuti.history')}}"><img src="{{ asset('assets/img/cuti.png') }}" /> Kelola Cuti</a></li>
     <li><a href="{{route('user.respass')}}"><img src="{{ asset('assets/img/pass.png') }}" /> Ubah Password</a></li>
-    <li><a href="{{route('user.list')}}"><img src="{{ asset('assets/img/user.png') }}" /> List User</a></li>
+    <li><a href="{{route('user.list')}}"><img src="{{ asset('assets/img/user.png') }}" /> Daftar User</a></li>
     <li>
         <form role="form" method="post" action="{{ route('logout') }}" id="logout-form">
             @csrf
             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link font-weight-bold px-0">
-                <img src="{{ asset('assets/img/logout.png') }}" /> <span>Log Out</span>
+                <img src="{{ asset('assets/img/logout.png') }}" /> <span>Keluar</span>
             </a>
         </form>
         @endrole
         @role(['staff'])
-    <li><a class="staff" href="{{route('absen.history')}}"><img src="{{ asset('assets/img/history.png') }}" /> History Absensi</a></li>
+    <li><a class="staff" href="{{route('absen.history')}}"><img src="{{ asset('assets/img/history.png') }}" /> Riwayat Absensi</a></li>
     <li><a class="staff" href="{{route('cuti.history')}}"><img src="{{ asset('assets/img/cuti.png') }}" /> Kelola Cuti</a></li>
     <li><a class="staff" href="{{route('user.respass')}}"><img src="{{ asset('assets/img/pass.png') }}" /> Ubah Password</a></li>
     <li>

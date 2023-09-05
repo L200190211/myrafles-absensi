@@ -1,12 +1,12 @@
 @extends('layouts.app', ['class' => 'g-sidenav-show bg-gray-100'])
-@section('title', 'History Absensi')
+@section('title', 'Riwayat Absensi')
 
 @section('mxwidth')
 
 @endsection
 
 @section('titlepage')
-<h2>History Absensi</h2>
+<h2>Riwayat Absensi</h2>
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
 </div>

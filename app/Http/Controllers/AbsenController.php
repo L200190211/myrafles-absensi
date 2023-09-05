@@ -70,7 +70,7 @@ class AbsenController extends Controller
     public function checkin(Request $request) {
  
  
-        $ipnya = '182.253.90.';
+        $ipnya = '127.0.0.1';
 
         // $ipnya = '111.94.147.' RFLS
         // $ipnya = '182.253.90.' JSTR

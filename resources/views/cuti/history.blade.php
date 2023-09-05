@@ -11,7 +11,7 @@
 <h2>Kelola Cuti</h2>
 @endrole
 @role('staff')
-<h2>History Cuti</h2>
+<h2>Riwayat Cuti</h2>
 @endrole
 <div class="title-right">
     <a href="{{ route('home') }}" class="btx btn-third"><i class="fa fa-long-arrow-left" aria-hidden="true"></i></a>
@@ -25,7 +25,7 @@
 <div class="row" style="display: none;">
     <div class="col-lg-12">
         <div class="jumbotron">
-            <h3>History Cuti</h3>
+            <h3>Riwayat Cuti</h3>
         </div>
     </div>
 </div>
@@ -47,10 +47,10 @@
         </thead>
         <tbody>
             <?php $i = 1; ?>
-            
+
             @role(['superadmin','admin'])
             @forelse ($dataSuperadmin as $cuti)
-                        <tr>
+            <tr>
                 <td scope="row">{{ $i++ }}</td>
                 <td>
                     {{ Carbon\Carbon::parse($cuti->tglCuti)->locale('id')->translatedFormat('d F Y') }}
@@ -100,6 +100,7 @@
                                 <div class="modal-footer mb-3">
                                     <a href="{{ route('cuti.decline', $cuti->id) }}" type="button" class="btn btn-third w25">Tolak</a>
                                     <a href="{{ route('cuti.accept', $cuti->id) }}" type="button" class="btn btn-main w70">ACC CUTI</a>
+                                    <input type="hidden" name="whoAcc" value="{{auth()->user()->id}}" />
                                 </div>
                                 @else
                                 @endif
@@ -119,7 +120,7 @@
 
             @role('staff')
             @forelse ($data as $cuti)
-                        <tr>
+            <tr>
                 <td scope="row">{{ $i++ }}</td>
                 <td>
                     {{ Carbon\Carbon::parse($cuti->tglCuti)->locale('id')->translatedFormat('d F Y') }}
@@ -159,6 +160,24 @@
                                 <div class="modal-body left-text">
                                     <p>{{ $cuti->rincian }}</p>
                                 </div>
+                                @if ($cuti->status == 0)
+                                <div class="modal-footer mb-3">
+                                    <p>Belum ACC</p>
+                                </div>
+                                @else
+                                <div class="modal-footer mb-3">
+                                    <p>Di ACC pada : {{ $cuti->tglAcc }}</p>
+                                    @forelse ($name as $acc)
+                                    @if ($acc->id == $cuti->whoAcc)
+                                    <p>Oleh : {{ $acc->firstname }}</p>
+                                    @else
+
+                                    @endif
+                                    @empty
+                                    @endforelse
+
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -171,7 +190,7 @@
             </tr>
             @endforelse
             @endrole
-            
+
 
         </tbody>
     </table>

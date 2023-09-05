@@ -8,10 +8,13 @@ use App\Notifications\CutiCreated;
 use App\Models\Cuti;
 use Carbon\Carbon;
 use Alert;
+use DateTime;
 use App\Models\User;
 use App\Notifications\CutiAcc;
 use App\Notifications\CutiDecline;
 use Illuminate\Support\Facades\Notification;
+
+use function Laravel\Prompts\confirm;
 
 class CutiController extends Controller
 {
@@ -24,11 +27,11 @@ class CutiController extends Controller
 
     public function store(Request $request)
     {
-        
-         // calculate tokencuti
-         $token = auth()->user()->tokenCuti;
 
-         if($token >= 1) {
+        // calculate tokencuti
+        $token = auth()->user()->tokenCuti;
+
+        if ($token >= 1) {
 
             $cuti = new Cuti();
             $cuti->who = $request->who;
@@ -47,19 +50,13 @@ class CutiController extends Controller
             $cuti->tglCuti = Carbon::create($year, $month, $day, $hour, $minute, $tz);
 
             $user = User::role('superadmin')->get();
+        } else {
 
-
-         } else {
-            
             Alert::warning('Token Cutimu Telah Habis');
             return redirect()->back();
+        }
 
-         }
-        
         $cuti->save();
-
-       
-       
 
         Notification::send($user, new CutiCreated($cuti));
 
@@ -70,35 +67,50 @@ class CutiController extends Controller
     // Riwayat Cuti
     public function history()
     {
-        $data = Cuti::where('who',auth()->user()->id)->paginate(25);
-       
+        $data = Cuti::where('who', auth()->user()->id)->paginate(25);
+        $name = User::all();
 
 
         $dataSuperadmin = Cuti::join('users', 'users.id', '=', 'cutis.who')
-        ->select('cutis.*', 'cutis.created_at AS when', 'users.firstname')
-        ->orderByDesc('cutis.created_at')->paginate(25);
+            ->select('cutis.*', 'cutis.created_at AS when', 'users.firstname')
+            ->orderByDesc('cutis.created_at')->paginate(25);
 
-        return view('cuti.history', compact('data','dataSuperadmin'));
+        // dd($name);
+        return view('cuti.history', compact('data', 'dataSuperadmin', 'name'));
     }
     // Riwayat Cuti
     public function kelola()
     {
-        $data = Cuti::where('who',auth()->user()->id)->paginate(25);
+        $data = Cuti::where('who', auth()->user()->id)->paginate(25);
         $dataSuperadmin = Cuti::latest()->paginate(25);
-        return view('cuti.kelola', compact('data','dataSuperadmin'));
+        return view('cuti.kelola', compact('data', 'dataSuperadmin'));
     }
 
 
     // Tolak Cuti
-    public function decline($id)
+    public function decline($id, Request $request)
     {
+        $now = new DateTime();
+        $year = Carbon::parse($now)->format('Y');
+        $month = Carbon::parse($now)->format('m');
+        $day = Carbon::parse($now)->format('d');
+        $hour = now()->format('H');
+        $minute = now()->format('i');
+        $tz = 'Asia/Jakarta';
+
+        $dateDec = Carbon::create($year, $month, $day, $hour, $minute, $tz);
+
         $data = Cuti::find($id);
         if ($data->status == "0") {
             $data->status = "2";
+            $data->update([
+                'whoAcc' => auth()->user()->id,
+                'tglAcc' => $dateDec,
+            ]);
         };
         $data->save();
 
-        $user = User::where('id',$data->who)->first();
+        $user = User::where('id', $data->who)->first();
         Notification::send($user, new CutiDecline($data));
 
         Alert::toast('Request Cuti Ditolak', 'error');
@@ -108,20 +120,37 @@ class CutiController extends Controller
     // Setujui Cuti
     public function accept(Request $request)
     {
+        $now = new DateTime();
+        $year = Carbon::parse($now)->format('Y');
+        $month = Carbon::parse($now)->format('m');
+        $day = Carbon::parse($now)->format('d');
+        $hour = now()->format('H');
+        $minute = now()->format('i');
+        $tz = 'Asia/Jakarta';
+
+        $dateAcc = Carbon::create($year, $month, $day, $hour, $minute, $tz);
+
         $data = Cuti::find($request->id);
         if ($data->status == "0") {
             $data->status = "1";
+            $data->update([
+                'whoAcc' => auth()->user()->id,
+                'tglAcc' => $dateAcc,
+            ]);
         };
+
         $data->save();
 
-        // $who = User::where('id',$request->who)->get();
-        
-        // $token = $who->tokenCuti;
+        $who = User::where('id', $data->who)->get();
 
-        // $calculated = intval($token) - intval($request->total);
-        // User::where('id',$data->who)->update(['tokenCuti' => $calculated]);
+        // Calculated -1 Token Cutis Where Cutis ACC
+        foreach ($who as $whoo) {
+            $token = intval($whoo->tokenCuti);
+            $calculated = intval($token) - intval($data->total);
+            User::where('id', $data->who)->update(['tokenCuti' => $calculated]);
+        }
 
-        $user = User::where('id',$request->who)->first();
+        $user = User::where('id', $request->who)->first();
         Notification::send($user, new CutiAcc($data));
 
         Alert::success('Berhasil Acc Cuti');
