@@ -121,8 +121,8 @@
             defaultDate: new Date($("#tahun").val(), $("#bulan").val() - 1),
             header: {
                 left: 'prev,next today',
-                center: 'title',
-                right: ''
+                center: '',
+                right: 'title'
             },
             locale:'id',
             editable: false,
