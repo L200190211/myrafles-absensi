@@ -16,6 +16,18 @@ class UserSeeder extends Seeder
     public function run()
     {
 
+        $staff1 = User::create([
+            'id' => 4,
+            'firstname' => 'Staff1',
+            'email' => 'sherlygmail.com',
+            'username' => 'staff1',
+            'noWa' => '888999333',
+            'jabatan' => 'Staff IT',
+            'alamat' => 'Jl Surabaya',
+            'lastLogin' => now(),
+            'password' => bcrypt('1234')
+        ]);
+        $staff1->assignRole('staff');
 
         $ceo = User::create([
 
@@ -30,19 +42,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234')
         ]);
         $ceo->assignRole('superadmin');
-
-        $staff1 = User::create([
-            'id' => 4,
-            'firstname' => 'Staff1',
-            'email' => 'sherlygmail.com',
-            'username' => 'staff1',
-            'noWa' => '888999333',
-            'jabatan' => 'Staff IT',
-            'alamat' => 'Jl Surabaya',
-            'lastLogin' => now(),
-            'password' => bcrypt('1234')
-        ]);
-        $staff1->assignRole('staff');
 
         $jaster = User::create([
             'id' => 2,
@@ -70,6 +69,6 @@ class UserSeeder extends Seeder
             'password' => bcrypt('1234')
         ]);
 
-        $admrafles->assignRole('superadmin');
+        $admrafles->assignRole('admin');
     }
 }

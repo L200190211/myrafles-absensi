@@ -114,9 +114,11 @@ b.red {color: var(--color-third);}
 .navigate a img{width: 3rem;}.withcheckin label span{font-weight:400;font-size:11px;color:var(--color-danger)}
 .fc-content{display:flex;justify-content:center;padding:1rem}.fc-content span{font-size:1.6rem!important}
 .item_jum{display: flex; justify-content: space-between; align-items: center;}
-.welcome{display:flex;flex-direction:column;grid-gap:10px}.subtitle{color:rgba(255, 255, 255, 0.84);display:flex;align-items:center;grid-gap:5px}
+.welcome{display:flex;flex-direction:column;grid-gap:10px}.subtitle{color:rgba(255, 255, 255, 0.84);display:flex;align-items:center;grid-gap:5px; margin-bottom: 1rem;}
 .btn-secondary:hover{background: var(--color-main);}
 .notcheck{color: #fff;display:flex;align-items:center;grid-gap:1rem;border-top:1px solid rgba(255,255,255,0.37);padding-top:1rem}.notcheck span{color:#fff}
+.absen-danger{background:var(--color-third);width:fit-content;padding:8px 20px !important;border-radius:5px}
+.absen-success{background:var(--color-success);width:fit-content;padding:8px 20px!important;border-radius:5px;margin-top:1rem!important}
 .btx-check{background:#fff;color:var(--color-main);display:flex;align-items:center;grid-gap:10px;padding:7px 14px!important;border-radius:5px;border:0;stroke:var(--color-main)}
 .fc-toolbar h2{font-size: 28px !important;}
 .fc-toolbar{margin: 2rem 0 2.5rem !important;align-items:center;display:flex;justify-content:space-between}

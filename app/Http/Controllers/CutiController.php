@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Alert;
 use DateTime;
 use App\Models\User;
+use Spatie\Permission\Models\Role;
 use App\Notifications\CutiAcc;
 use App\Notifications\CutiDecline;
 use Illuminate\Support\Facades\Notification;
@@ -71,11 +72,12 @@ class CutiController extends Controller
         $name = User::all();
 
 
-        $dataSuperadmin = Cuti::join('users', 'users.id', '=', 'cutis.who')
-            ->select('cutis.*', 'cutis.created_at AS when', 'users.firstname')
-            ->orderByDesc('cutis.created_at')->paginate(25);
+        $dataSuperadmin = User::join('cutis', 'cutis.who', '=', 'users.id')->with('roles')
+            ->select('cutis.*', 'cutis.created_at AS when', 'cutis.status AS status1', 'users.firstname', 'users.*', 'cutis.id AS cutis_id')
+            ->orderByDesc('cutis.created_at')->paginate(15);
 
-        // dd($name);
+        // $datarole = User::with('roles')->get();
+        // dd($dataSuperadmin);
         return view('cuti.history', compact('data', 'dataSuperadmin', 'name'));
     }
     // Riwayat Cuti
@@ -150,7 +152,7 @@ class CutiController extends Controller
             User::where('id', $data->who)->update(['tokenCuti' => $calculated]);
         }
 
-        $user = User::where('id', $request->who)->first();
+        $user = User::where('id', $data->who)->first();
         Notification::send($user, new CutiAcc($data));
 
         Alert::success('Berhasil Acc Cuti');

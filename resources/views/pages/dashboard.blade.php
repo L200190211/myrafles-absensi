@@ -35,9 +35,9 @@
                 </a>
             </div>
             @if ($absen->created_at ?? null != null)
-            @if ($absen->created_at->format('H:i') <= '08:00' ) <div class="notcheck">Terima kasih telah datang tepat waktu 🥳</div>
+            @if ($absen->created_at->format('H:i') <= '08:00' ) <div class="notcheck absen-success">Terima kasih telah datang tepat waktu 🥳</div>
                 @else
-                <div class="notcheck">Kamu Telat 
+                <div class="notcheck absen-danger">Kamu Telat 
                 @if ($absen->created_at->format('H:i') > '08:00' )
                     @php
                         $start_time = $absen->created_at->format('H:i');
