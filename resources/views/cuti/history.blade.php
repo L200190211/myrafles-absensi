@@ -105,7 +105,22 @@
                                     <a href="{{ route('cuti.accept', $cuti->cutis_id) }}" type="button" class="btn btn-main w70">ACC CUTI</a>
                                     <input type="hidden" name="whoAcc" value="{{auth()->user()->id}}" />
                                 </div>
+                                @elseif ($cuti->status1 == 1)
+                                <div class="modal-footer mb-3">
+                                    <p>Di ACC pada : {{ $cuti->tglAcc }}</p>
+                                    @forelse ($name as $acc)
+                                    @if ($acc->id == $cuti->whoAcc)
+                                    <p>Oleh : {{ $acc->firstname }}</p>
+                                    @else
+
+                                    @endif
+                                    @empty
+                                    @endforelse
+                                </div>
                                 @else
+                                <div class="modal-footer mb-3">
+                                    <p>Pengajuan Cuti ditolak : {{ $cuti->tglAcc }}</p>
+                                </div>
                                 @endif
                                 @endrole
 
@@ -120,7 +135,22 @@
                                 </div>
                                 @else
                                 @endif
+                                @elseif ($cuti->status1 == 1)
+                                <div class="modal-footer mb-3">
+                                    <p>Di ACC pada : {{ $cuti->tglAcc }}</p>
+                                    @forelse ($name as $acc)
+                                    @if ($acc->id == $cuti->whoAcc)
+                                    <p>Oleh : {{ $acc->firstname }}</p>
+                                    @else
+
+                                    @endif
+                                    @empty
+                                    @endforelse
+                                </div>
                                 @else
+                                <div class="modal-footer mb-3">
+                                    <p>Pengajuan Cuti ditolak : {{ $cuti->tglAcc }}</p>
+                                </div>
                                 @endif
                                 @endrole
                             </div>
