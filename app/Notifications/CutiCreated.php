@@ -51,7 +51,7 @@ class CutiCreated extends Notification
             'tgl_cuti' => $this->cuti->created_at,
             'notifType' => 'cutiCreated',
             'pegawai' => $this->cuti->who,
-            'text' => 'Ada Cuti Baru',
+            'text' => 'Ada Cuti Baru dari ',
         ];
     }
 }

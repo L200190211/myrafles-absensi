@@ -47,7 +47,7 @@ smallwrap
      @forelse($showNotif as $key => $notif)
      <div class="notif_div">
           <a class="mark-as-read notifactive" data-id="{{$notif->id}}" >
-                  <p>{{ $notif->data['text'] }} <span class="badge badge_notif">{{ $notif->created_at->diffForHumans(null, false, true) }}</span></p>
+                  <p>{{ $notif->data['text'] }},{{ $notif->data['pegawai']}} <span class="badge badge_notif">{{ $notif->created_at->diffForHumans(null, false, true) }}</span></p>
               </a>
       </div>
         

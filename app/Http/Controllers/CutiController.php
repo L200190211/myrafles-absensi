@@ -28,7 +28,7 @@ class CutiController extends Controller
 
     public function store(Request $request)
     {
-
+       
         // calculate tokencuti
         $token = auth()->user()->tokenCuti;
 
@@ -50,7 +50,7 @@ class CutiController extends Controller
 
             $cuti->tglCuti = Carbon::create($year, $month, $day, $hour, $minute, $tz);
 
-            $user = User::role('superadmin')->get();
+            $user = User::role(['superadmin', 'admin'])->get();
         } else {
 
             Alert::warning('Token Cutimu Telah Habis');
