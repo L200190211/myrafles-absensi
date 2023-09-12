@@ -68,6 +68,7 @@ Route::group(['middleware' => 'auth'], function () {
 		Route::get('/absensi/filter', [AbsenController::class, 'filter'])->name('filter');
 		Route::get('/absensi', [AbsenController::class, 'absensi'])->name('absensi');
 		Route::get('/history', [AbsenController::class, 'history'])->name('history');
+		Route::get('/search', [AbsenController::class, 'search'])->name('search');
 	});
 
 

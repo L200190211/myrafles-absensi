@@ -15,14 +15,38 @@ use Illuminate\Support\Facades\Response;
 class AbsenController extends Controller
 {
 
-    public function history()
+    public function history(Request $request)
     {
 
         // $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
+        // $absen = Absen::all();
         $absen = Absen::all();
-        $user = User::role('staff')->where('status', 1)->get();
-        $data = User::with('roles')->where('status','1')->orderByRaw('id DESC')->paginate(15);
-        return view('absen.history', compact('absen', 'user', 'data'));
+        $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
+        $data = User::with('roles')->where('status', '1')->orderByRaw('id DESC')->paginate(15);
+        $countday = Carbon::now()->month(Carbon::now()->format('m'))->daysInMonth;
+        // $countday = Carbon::now()->format('d');
+        $monthNow = Carbon::now()->format('F');
+        $monthNownum = Carbon::now()->format('m');
+        $yearNownum = Carbon::now()->format('Y');
+        // dd($yearNownum);
+        return view('absen.history', compact('absen', 'user', 'data', 'countday', 'monthNow', 'monthNownum', 'yearNownum', 'request'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $cariUser = $request->userID;
+        $cariBulan = $request->bulan;
+        $cariTahun = $request->tahun;
+        $absen = Absen::all();
+        $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
+        $data = User::with('roles')->where('status', '1')->where('id', $cariUser)->orderByRaw('id DESC')->paginate(15);
+        $countday = Carbon::now()->month($cariBulan)->daysInMonth;
+        $monthNow = Carbon::createFromFormat('m', $cariBulan)->format('F');
+        $monthNownum = $cariBulan;
+        $yearNownum = $cariTahun;
+        // dd($yearNownum);
+        return view('absen.history', compact('absen', 'user', 'data', 'countday', 'monthNow', 'monthNownum', 'yearNownum', 'request'));
     }
 
     public function absensi()

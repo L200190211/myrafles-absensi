@@ -151,7 +151,7 @@ span.absen-success, span.absen-danger{color:#fff!important;font-weight:600}
 
 
 
-.absen-table{overflow:auto}.absen-table #example{border-collapse:collapse;width:100%}
+.absen-table{overflow:auto;border-radius: 1.2rem;}.absen-table #example{border-collapse:collapse;width:100%}
 .absen-table th:first-child,.absen-table td:first-child{position:sticky;left:0;z-index:1}
 .absen-table th:nth-child(2),.absen-table td:nth-child(2){position:sticky;left:73.3px;z-index:1}
 .absen-table th{position:sticky;top:0;z-index:2}
