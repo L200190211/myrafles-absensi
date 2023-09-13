@@ -20,9 +20,9 @@
 @endsection
 
 @section('content')
-@role('superadmin')
 <div class="filter">
     <form method="GET" action="{{route('absen.search')}}" class="filter_form">
+        @role(['superadmin', 'admin'])
         <div class="formgroup_filter">
             <label for="exampleFormControlInput1" class="form-label m-0">Nama Staff</label>
             <select class="form-control" name="userID" id="userID">
@@ -31,6 +31,10 @@
                 @endforeach
             </select>
         </div>
+        @endrole
+        @role('staff')
+        <input type="hidden" id="userID" name="userID" value="{{ auth()->user()->id }}"/>
+        @endrole
         <div class="formgroup_filter">
             <label for="exampleFormControlInput1" class="form-label m-0">Bulan</label>
             <select class="form-control" name="bulan" id="bulan">
@@ -61,7 +65,6 @@
         <button type="submit" class="btn btn-white btn-lg" id="submit">Submit</button>
     </form>
 </div>
-@endrole
 <div class="row" style="display: none;">
     <div class="col-lg-12">
         <div class="jumbotron">

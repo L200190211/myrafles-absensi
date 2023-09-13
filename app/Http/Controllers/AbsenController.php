@@ -21,14 +21,25 @@ class AbsenController extends Controller
         // $month = array_map(fn($month) => Carbon::create(null, $month)->format('F'), range(1, 12));
         // $absen = Absen::all();
         $absen = Absen::all();
-        $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
-        $data = User::with('roles')->where('status', '1')->orderByRaw('id DESC')->paginate(15);
+
         $countday = Carbon::now()->month(Carbon::now()->format('m'))->daysInMonth;
         // $countday = Carbon::now()->format('d');
         $monthNow = Carbon::now()->format('F');
         $monthNownum = Carbon::now()->format('m');
         $yearNownum = Carbon::now()->format('Y');
         // dd($yearNownum);
+        if (auth()->user()->hasAnyRole('superadmin')) {
+            $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
+            $data = User::with('roles')->where('status', '1')->orderByRaw('id DESC')->paginate(15);
+        } elseif (auth()->user()->hasAnyRole('admin')) {
+            $user = User::role(['staff', 'admin'])->where('status', 1)->get();
+            $data = User::role(['staff', 'admin'])->where('status', '1')->orderByRaw('id DESC')->paginate(15);
+        } else {
+            // abort(404);
+            $user = User::where('id', '=', auth()->user()->id)->get();
+            $data = User::where('id', '=', auth()->user()->id)->get();
+            // dd($user);
+        }
         return view('absen.history', compact('absen', 'user', 'data', 'countday', 'monthNow', 'monthNownum', 'yearNownum', 'request'));
     }
 
