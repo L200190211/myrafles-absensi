@@ -58,8 +58,8 @@ class CutiController extends Controller
         }
 
         $cuti->save();
-
-        Notification::send($user, new CutiCreated($cuti));
+        $getDataUser = Cuti::join('users','cutis.who','=','users.id')->where('cutis.id',$cuti->id)->select('users.firstname')->first();
+        Notification::send($user, new CutiCreated($cuti,$getDataUser));
 
         Alert::success('Request Cuti Sukses Dibuat');
         return redirect()->route('cuti.history');
@@ -111,9 +111,9 @@ class CutiController extends Controller
             ]);
         };
         $data->save();
-
+        $getDataUser = Cuti::join('users','cutis.whoAcc','=','users.id')->where('cutis.id',$data->id)->select('users.firstname')->first();
         $user = User::where('id', $data->who)->first();
-        Notification::send($user, new CutiDecline($data));
+        Notification::send($user, new CutiDecline($data,$getDataUser));
 
         Alert::toast('Request Cuti Ditolak', 'error');
         return redirect()->route('cuti.history');
@@ -152,8 +152,9 @@ class CutiController extends Controller
             User::where('id', $data->who)->update(['tokenCuti' => $calculated]);
         }
 
+        $getDataUser = Cuti::join('users','cutis.whoAcc','=','users.id')->where('cutis.id',$data->id)->select('users.firstname')->first();
         $user = User::where('id', $data->who)->first();
-        Notification::send($user, new CutiAcc($data));
+        Notification::send($user, new CutiAcc($data,$getDataUser));
 
         Alert::success('Berhasil Acc Cuti');
         return redirect()->route('cuti.history');

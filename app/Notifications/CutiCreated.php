@@ -14,9 +14,10 @@ class CutiCreated extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct($cuti)
+    public function __construct($cuti,$getDataUser)
     {
         $this->cuti = $cuti;
+        $this->getDataUser = $getDataUser;
     }
 
     /**
@@ -50,7 +51,7 @@ class CutiCreated extends Notification
         return [
             'tgl_cuti' => $this->cuti->created_at,
             'notifType' => 'cutiCreated',
-            'pegawai' => $this->cuti->who,
+            'pegawai' => $this->getDataUser->firstname,
             'text' => 'Ada Cuti Baru dari ',
         ];
     }
