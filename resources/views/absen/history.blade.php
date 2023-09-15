@@ -106,7 +106,7 @@
                             <!-- Condition if $i == date and $monthNownum == month and $yearNownum == year-->
                             @if ($i == Carbon\Carbon::parse($key->tgl_absen)->translatedFormat('d') AND $monthNownum == Carbon\Carbon::parse($key->tgl_absen)->translatedFormat('m') AND $yearNownum == Carbon\Carbon::parse($key->tgl_absen)->translatedFormat('Y'))
                                 <!-- Condition if absen hours > 08.00 -->
-                                @if (Carbon\Carbon::parse($key->tgl_absen)->translatedFormat('H:i') > '08:00' )
+                                @if (Carbon\Carbon::parse($key->tgl_absen)->translatedFormat('H:i') > '08:10' )
                                     <span class="absen-danger">{{Carbon\Carbon::parse($key->tgl_absen)->translatedFormat('H:i')}}</span>
                                 <!-- Condition if absen hours < 08.00 -->
                                 @else

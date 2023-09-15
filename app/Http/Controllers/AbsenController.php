@@ -113,11 +113,11 @@ class AbsenController extends Controller
 
         $ipnya = '127.0.0.1';
 
-        // $ipnya = '111.94.147.' RFLS
+        // $ipnya = '111.94.' RFLS
         // $ipnya = '182.253.90.' JSTR
         // $ipnya = '127.0.0.' LOCAL
 
-        if (substr($request->ip(), 0, 11) == $ipnya) {
+        if (substr($request->ip(), 0, 7) == $ipnya) {
             Absen::create(['users_id' => auth()->user()->id, 'tgl_absen' => $request->waktu, 'ip_address' => $request->ip()]);
             Alert::success('Check in berhasil');
             return redirect()->back();

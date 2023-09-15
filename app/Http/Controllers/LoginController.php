@@ -40,7 +40,7 @@ class LoginController extends Controller
         $jamakhir = '08.30';
         $ipnya = '127.0.0.1';
 
-        // $ipnya = '111.94.147.' RFLS
+        // $ipnya = '111.94.' RFLS
         // $ipnya = '182.253.90.' JSTR
         // $ipnya = '127.0.0.' LOCAL
 
@@ -57,7 +57,7 @@ class LoginController extends Controller
             
         } else {
 
-            if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,11) == $ipnya) {
+            if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,7) == $ipnya) {
 
                 
                 $log = Absen::where('users_id' ,Auth::user()->id)
@@ -76,7 +76,7 @@ class LoginController extends Controller
                     Alert::success('Check in berhasil');
                 }
 
-            }else if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,11) !== $ipnya){
+            }else if(now()->format('H:i') >= $jamawal && now()->format('H:i') < $jamakhir && substr($request->ip(),0,7) !== $ipnya){
                 Auth::logout();
                 return redirect()->back()->withErrors(['ip' => 'Login Gagal, Pastikan kamu terhubung dengan Wi-Fi Kantor']);
             }else{
