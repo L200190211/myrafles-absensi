@@ -46,12 +46,23 @@ class AbsenController extends Controller
     public function search(Request $request)
     {
 
-        $cariUser = $request->userID;
         $cariBulan = $request->bulan;
         $cariTahun = $request->tahun;
         $absen = Absen::all();
-        $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
-        $data = User::with('roles')->where('status', '1')->where('id', $cariUser)->orderByRaw('id DESC')->paginate(15);
+        // <-- Search when by ID User -->
+        // $cariUser = $request->userID;
+        // $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
+        // $data = User::with('roles')->where('status', '1')->where('id', $cariUser)->orderByRaw('id DESC')->paginate(15);
+        if (auth()->user()->hasAnyRole('superadmin')) {
+            $user = User::role(['staff', 'admin', 'superadmin'])->where('status', 1)->get();
+            $data = User::with('roles')->where('status', '1')->orderByRaw('id DESC')->paginate(15);
+        } elseif (auth()->user()->hasAnyRole('admin')) {
+            $user = User::role(['staff', 'admin'])->where('status', 1)->get();
+            $data = User::role(['staff', 'admin'])->where('status', '1')->orderByRaw('id DESC')->paginate(15);
+        } else {
+            $user = User::where('id', '=', auth()->user()->id)->get();
+            $data = User::where('id', '=', auth()->user()->id)->get();
+        }
         $countday = Carbon::now()->month($cariBulan)->daysInMonth;
         $monthNow = Carbon::createFromFormat('m', $cariBulan)->format('F');
         $monthNownum = $cariBulan;
@@ -117,8 +128,8 @@ class AbsenController extends Controller
         // $ipnya = '182.253.90.' JSTR
         // $ipnya = '127.0.0.' LOCAL
 
-        if (substr($request->ip(), 0, 7) == $ipnya) {
-            Absen::create(['users_id' => auth()->user()->id, 'tgl_absen' => $request->waktu, 'ip_address' => $request->ip()]);
+        if (substr($request->ip(), 0, 11) == $ipnya) {
+            Absen::create(['users_id' => auth()->user()->id, 'tgl_absen' => now(), 'ip_address' => $request->ip()]);
             Alert::success('Check in berhasil');
             return redirect()->back();
         } else {

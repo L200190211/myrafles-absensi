@@ -22,7 +22,8 @@
 @section('content')
 <div class="filter">
     <form method="GET" action="{{route('absen.search')}}" class="filter_form">
-        @role(['superadmin', 'admin'])
+        <!-- Search when by ID User -->
+        {{-- @role(['superadmin', 'admin'])
         <div class="formgroup_filter">
             <label for="exampleFormControlInput1" class="form-label m-0">Nama Staff</label>
             <select class="form-control" name="userID" id="userID">
@@ -34,7 +35,7 @@
         @endrole
         @role('staff')
         <input type="hidden" id="userID" name="userID" value="{{ auth()->user()->id }}"/>
-        @endrole
+        @endrole --}}
         <div class="formgroup_filter">
             <label for="exampleFormControlInput1" class="form-label m-0">Bulan</label>
             <select class="form-control" name="bulan" id="bulan">
